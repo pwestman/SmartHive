@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">SmartHive</string>
     <string name="test_button">Button</string>
+    <string name="title_activity_sign_in">SignInActivity</string>
+    <string name="title_activity_hive_information">HiveInformation</string>
+    <string name="title_activity_settings">Settings</string>
 </resources>
