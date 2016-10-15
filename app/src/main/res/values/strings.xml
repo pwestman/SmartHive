@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SmartHive</string>
+    <string name="test_button">Button</string>
 </resources>
