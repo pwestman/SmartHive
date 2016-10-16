@@ -15,28 +15,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SignInActivity"
-            android:label="@string/title_activity_sign_in"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".HiveInformation"
-            android:label="@string/title_activity_hive_information"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="nottoobee.toobee.smarthive.MainActivity" />
-        </activity>
-        <activity
-            android:name=".Settings"
-            android:label="@string/title_activity_settings"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="nottoobee.toobee.smarthive.MainActivity" />
-        </activity>
     </application>
 
 </manifest>
