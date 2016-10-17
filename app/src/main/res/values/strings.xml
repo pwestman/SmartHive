@@ -2,4 +2,20 @@
     <string name="app_name">SmartHive</string>
     <string name="test_button">Button</string>
     <string name="add_hive">Add Hive</string>
+    <string name="hive_1">Hive 1</string>
+    <string name="hive_2">Hive 2</string>
+    <string name="hive_3">Hive 3</string>
+    <string name="hive">Hive</string>
+    <string name="temperature">Temperature:</string>
+    <string name="last_inspection">Last Inspection:</string>
+    <string name="weight">Weight:</string>
+    <string name="population">Population(approx.):</string>
+    <string name="timer">Fetch timer</string>
+    <string name="units">Units</string>
+    <string name="language">Language</string>
+    <string name="welcome">Welcome</string>
+    <string name="name">Name</string>
+    <string name="log_in">Log In</string>
+    <string name="nameIn">Name:</string>
+    <string name="passwordIn">Password:</string>
 </resources>

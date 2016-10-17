@@ -5,15 +5,14 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+public class SignIn extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_sign_in);
 
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
@@ -29,15 +28,10 @@ public class MainActivity extends AppCompatActivity {
         ab.setDisplayUseLogoEnabled(true);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.bee_menu, menu);
-        return true;
-    }
-
-    public void getinfo(View view) {
-        Intent intent = new Intent(this, HiveInfo.class);
+    public void login(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 }
+
+
