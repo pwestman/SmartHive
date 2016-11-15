@@ -25,78 +25,72 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/layer_5"
-            android:layout_below="@+id/include"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
-            android:layout_marginBottom="60dp"
-            android:layout_marginTop="60dp">
+            android:layout_below="@+id/include"
+            android:layout_alignParentBottom="true">
 
-
-            <TextView
-                android:text="@string/hive_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="75dp"
-                android:layout_marginTop="35dp"
-                android:id="@+id/textView"
-                android:textStyle="normal|bold" />
-
-            <TextView
-                android:text="@string/hive_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="35dp"
-                android:layout_marginEnd="75dp"
-                android:id="@+id/textView2"
-                android:textStyle="normal|bold" />
-
-            <TextView
-                android:text="@string/hive_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignEnd="@+id/textView"
-                android:layout_marginBottom="171dp"
-                android:layout_marginStart="75dp"
-                android:id="@+id/textView3"
-                android:textStyle="normal|bold" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/hive_green"
-                android:id="@+id/imageView4"
-                android:layout_below="@id/textView"
-                android:onClick="getinfo"
-                android:layout_marginTop="25dp"
-                android:layout_marginStart="35dp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/hive_green"
-                android:id="@+id/imageView5"
-                android:layout_alignParentEnd="true"
-                android:onClick="getinfo"
-                android:layout_below="@id/textView2"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="35dp" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/red_green"
                 android:id="@+id/imageView6"
-                android:layout_below="@id/textView3"
-                android:layout_alignTop="@+id/textView3"
                 android:onClick="getinfo"
-                android:layout_marginTop="35dp"
-                android:layout_marginStart="35dp" />
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/imageView4" />
+
+            <TextView
+                android:text="@string/hive_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView2"
+                android:textStyle="normal|bold"
+                android:layout_alignParentTop="true"
+                android:layout_alignStart="@+id/imageView5"
+                android:layout_marginStart="28dp" />
+
+            <TextView
+                android:text="@string/hive_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="121dp"
+                android:id="@+id/textView"
+                android:textStyle="normal|bold"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/hive_green"
+                android:id="@+id/imageView5"
+                android:onClick="getinfo"
+                android:layout_marginEnd="81dp"
+                android:layout_alignTop="@+id/imageView4"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:text="@string/hive_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView3"
+                android:textStyle="normal|bold"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/textView"
+                android:layout_marginBottom="132dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/hive_green"
+                android:id="@+id/imageView4"
+                android:onClick="getinfo"
+                android:layout_marginStart="80dp"
+                android:layout_below="@+id/textView"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp" />
 
         </RelativeLayout>
 
