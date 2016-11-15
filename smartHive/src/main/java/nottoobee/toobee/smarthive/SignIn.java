@@ -14,8 +14,8 @@ import com.google.firebase.auth.*;
 
 public class SignIn extends AppCompatActivity {
 
-    private FirebaseAuth mFirebaseAuth;
-    private FirebaseUser mFirebaseUser;
+    //private FirebaseAuth mFirebaseAuth;
+    //private FirebaseUser mFirebaseUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
