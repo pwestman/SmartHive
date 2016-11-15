@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
         tv.setText(hive.getName());
         ln.addView(tv);
         ImageView iv = new ImageView(this);
-        iv.setImageResource(R.drawable.hive);
+        iv.setImageResource(R.drawable.hive_green);
         ln.addView(iv);
     }
 
