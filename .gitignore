@@ -5,7 +5,10 @@
 /.idea/libraries
 /.idea/modules.xml
 /.idea/misc.xml
+<<<<<<< HEAD
 .idea/misc.xml
+=======
+>>>>>>> auth
 .DS_Store
 /build
 /captures
