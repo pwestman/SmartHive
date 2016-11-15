@@ -15,10 +15,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class MainActivity extends AppCompatActivity {
 
     private ListView mDrawerList;
     private ArrayAdapter<String> mAdapter;
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser mFirebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
