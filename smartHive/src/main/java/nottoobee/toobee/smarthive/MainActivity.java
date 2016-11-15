@@ -15,10 +15,17 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class MainActivity extends AppCompatActivity {
 
     private ListView mDrawerList;
     private ArrayAdapter<String> mAdapter;
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser mFirebaseUser;
+    private String mUsername;
+    private String mPhotoUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +48,21 @@ public class MainActivity extends AppCompatActivity {
         ab.setDisplayUseLogoEnabled(true);
 
         addDrawerItems();
+
+        // Firebase Auth
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+
+        if (mFirebaseUser == null) {
+            startActivity(new Intent(this, SignIn.class));
+            finish();
+            return;
+        } else {
+            mUsername = mFirebaseUser.getDisplayName();
+            if (mFirebaseUser.getPhotoUrl() != null) {
+                mPhotoUrl = mFirebaseUser.getPhotoUrl().toString();
+            }
+        }
     }
 
     private void addDrawerItems() {

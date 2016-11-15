@@ -25,14 +25,6 @@
         android:layout_marginTop="60dp"
         android:id="@+id/relativeLayout">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/hive_green"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:id="@+id/imageView" />
-
         <TextView
             android:text="@string/hive"
             android:layout_width="wrap_content"
@@ -125,6 +117,16 @@
             android:layout_marginTop="25dp"
             android:layout_marginEnd="75dp"
             android:id="@+id/textView12" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/hive_green"
+            android:id="@+id/imageView"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="16dp" />
 
 
     </RelativeLayout>
