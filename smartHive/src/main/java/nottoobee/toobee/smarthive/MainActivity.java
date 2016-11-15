@@ -5,10 +5,13 @@
 package nottoobee.toobee.smarthive;
 
 import android.content.Intent;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Layout;
+import android.view.Display;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,6 +20,8 @@ import android.widget.ListView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,6 +68,10 @@ public class MainActivity extends AppCompatActivity {
                 mPhotoUrl = mFirebaseUser.getPhotoUrl().toString();
             }
         }
+
+        // Database connection - Get DB reference that corresponds to active user.
+        //TODO: Finish getting user's hives.
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(mFirebaseUser.getUid());
     }
 
     private void addDrawerItems() {
@@ -90,5 +99,14 @@ public class MainActivity extends AppCompatActivity {
     public void getinfo(View view) {
         Intent intent = new Intent(this, HiveInfo.class);
         startActivity(intent);
+    }
+
+    /**
+     * Creates a graphical representation of the given Hive in the given Layout.
+     * @param hive
+     * @param layout
+     */
+    private void drawHive(Hive hive, Layout layout) {
+
     }
 }

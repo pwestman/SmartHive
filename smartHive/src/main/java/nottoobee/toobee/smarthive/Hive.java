@@ -8,6 +8,8 @@ import java.util.Date;
 
     e.g.
         ref.push().setValue(new Hive("Hive 1", "gps coords"));
+
+    They can also be read from the database straight into these objects.
 */
 
 public class Hive {
