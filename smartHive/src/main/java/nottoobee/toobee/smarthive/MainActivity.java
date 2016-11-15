@@ -16,7 +16,10 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.GridLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser mFirebaseUser;
     private String mUsername;
     private String mPhotoUrl;
+    private int numHives = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
 
         addDrawerItems();
 
+        // TODO: Remove these once the placement of hive graphics on GridLayout is working.
+        drawHive(new Hive("Hive 1", "gps coordinates"), (GridLayout)findViewById(R.id.hive_display));
+        drawHive(new Hive("Hive 2", "gps coordinates"), (GridLayout)findViewById(R.id.hive_display));
+
         // Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
@@ -69,9 +77,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        // Database connection - Get DB reference that corresponds to active user.
         //TODO: Finish getting user's hives.
+        // Database connection - Get DB reference that corresponds to active user.
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference(mFirebaseUser.getUid());
+
     }
 
     private void addDrawerItems() {
@@ -102,11 +111,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Creates a graphical representation of the given Hive in the given Layout.
+     * Creates a graphical representation of the given Hive in the given GridLayout.
      * @param hive
      * @param layout
      */
-    private void drawHive(Hive hive, Layout layout) {
-
+    private void drawHive(Hive hive, GridLayout layout) {
+        // TODO: Pretty this up to make it look like the mockup.
+        TextView tv = new TextView(this);
+        tv.setHint("hive_name_" + numHives++);
+        tv.setText(hive.getName());
+        layout.addView(tv);
     }
 }
