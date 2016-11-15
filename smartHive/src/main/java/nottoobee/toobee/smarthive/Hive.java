@@ -1,15 +1,19 @@
+/*
+    Team Name: tooBee || !tooBee
+*/
+
 package nottoobee.toobee.smarthive;
 
 import java.util.Date;
 
 /*
-    N.B.: Instances of both of these classes can be passed directly to Firebase's setValue() method,
+    N.B.: Instances this class can be passed directly to Firebase's setValue() method,
     since they use the same field names as the database.
 
     e.g.
         ref.push().setValue(new Hive("Hive 1", "gps coords"));
 
-    They can also be read from the database straight into these objects.
+    It is also possible to pull values from the database directly into a Hive object.
 */
 
 public class Hive {

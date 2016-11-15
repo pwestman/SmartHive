@@ -1,3 +1,7 @@
+/*
+    Team Name: tooBee || !tooBee
+*/
+
 package nottoobee.toobee.smarthive;
 
 import android.content.Context;
@@ -54,7 +58,6 @@ public class AddHive extends AppCompatActivity {
         // Define a listener that responds to location updates
         LocationListener locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
-                // Called when a new location is found by the network location provider.
                 loc = location;
             }
 
@@ -69,12 +72,11 @@ public class AddHive extends AppCompatActivity {
         try {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
         } catch (SecurityException e) {
-            //TODO: do something
+            e.printStackTrace();
         }
 
         // Create Hive
-        EditText et = (EditText)findViewById(R.id.add_hive_name);
-        String hiveName = et.getText().toString();
+        String hiveName = ((EditText)findViewById(R.id.add_hive_name)).getText().toString();
         Hive hive = new Hive(hiveName, loc.toString());
 
         // TODO: Upload this Hive to the database.
