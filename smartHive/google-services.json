@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "386695389370-7jp12b8e4cek6403padpqjhm4q7nr97b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "nottoobee.toobee.smarthive",
+            "certificate_hash": "06665D3B6D43CFE52CD6C49CE683D836EB737D0B"
+          }
+        },
+        {
           "client_id": "386695389370-8r716tdbg3mj4b3l5e5lqh8bhhp3cdtl.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
