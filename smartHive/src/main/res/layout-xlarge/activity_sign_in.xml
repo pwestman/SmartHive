@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_sign_in"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="nottoobee.toobee.smarthive.SignIn">
+
+    <include
+        layout="@layout/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/include" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/layer_5"
+        android:layout_below="@+id/include"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="160dp"
+        android:layout_marginTop="120dp"
+        android:id="@+id/relativeLayout2">
+
+
+        <TextView
+            android:text="@string/nameIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView17"
+            android:textSize="21sp"
+            android:layout_alignTop="@+id/editText"
+            android:layout_alignEnd="@+id/textView18" />
+
+        <TextView
+            android:text="@string/passwordIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="125dp"
+            android:id="@+id/textView18"
+            android:textSize="21sp"
+            android:layout_alignTop="@+id/editText2" />
+
+        <Button
+            android:text="@string/log_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="login"
+            android:id="@+id/button"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="60dp" />
+
+        <TextView
+            android:text="@string/welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView16"
+            android:textStyle="normal|bold"
+            android:textSize="26sp"
+            android:layout_above="@+id/editText"
+            android:layout_alignStart="@+id/button"
+            android:layout_marginBottom="56dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:background="@color/white"
+            android:ems="10"
+            android:id="@+id/editText"
+            android:layout_marginBottom="41dp"
+            android:layout_above="@+id/editText2"
+            android:layout_alignStart="@+id/textView16"
+            android:layout_marginStart="47dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:background="@color/white"
+            android:ems="10"
+            android:id="@+id/editText2"
+            android:layout_marginBottom="281dp"
+            android:layout_above="@+id/button"
+            android:layout_alignStart="@+id/editText" />
+    </RelativeLayout>
+</RelativeLayout>
