@@ -19,6 +19,7 @@ public class HiveInfo extends AppCompatActivity {
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
         ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
 
         try {
             ab.setDisplayShowHomeEnabled(true);
