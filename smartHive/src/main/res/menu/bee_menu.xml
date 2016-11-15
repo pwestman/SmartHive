@@ -9,6 +9,7 @@
         app:showAsAction="always"
         android:icon="@drawable/add_hive"
         android:orderInCategory="2"
+        android:onClick="newHive"
         android:title="@string/add_hive" />
 
 </menu>

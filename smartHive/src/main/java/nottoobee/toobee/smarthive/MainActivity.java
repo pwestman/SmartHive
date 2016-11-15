@@ -5,6 +5,10 @@
 package nottoobee.toobee.smarthive;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.Drawable;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -13,10 +17,13 @@ import android.support.v7.widget.Toolbar;
 import android.text.Layout;
 import android.view.Display;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -25,6 +32,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         addDrawerItems();
 
-        // TODO: Remove these once the placement of hive graphics on GridLayout is working.
+        // TODO: Remove these once the placement of hive graphics once the GridLayout is working.
         drawHive(new Hive("Hive 1", "gps coordinates"), (GridLayout)findViewById(R.id.hive_display));
         drawHive(new Hive("Hive 2", "gps coordinates"), (GridLayout)findViewById(R.id.hive_display));
 
@@ -117,9 +125,18 @@ public class MainActivity extends AppCompatActivity {
      */
     private void drawHive(Hive hive, GridLayout layout) {
         // TODO: Pretty this up to make it look like the mockup.
+        LinearLayout ln = new LinearLayout(this);
+        layout.addView(ln);
         TextView tv = new TextView(this);
         tv.setHint("hive_name_" + numHives++);
         tv.setText(hive.getName());
-        layout.addView(tv);
+        ln.addView(tv);
+        ImageView iv = new ImageView(this);
+        iv.setImageResource(R.drawable.hive);
+        ln.addView(iv);
+    }
+
+    public void newHive(MenuItem item) {
+        startActivity(new Intent(this, AddHive.class));
     }
 }

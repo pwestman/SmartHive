@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,6 +29,7 @@ public class AddHive extends AppCompatActivity {
     private FirebaseUser mFirebaseUser;
     private String mUsername;
     private String mPhotoUrl;
+    private String mUid;
     private Location loc;
 
     // TODO: Validate all fields.
@@ -50,11 +52,15 @@ public class AddHive extends AppCompatActivity {
             if (mFirebaseUser.getPhotoUrl() != null) {
                 mPhotoUrl = mFirebaseUser.getPhotoUrl().toString();
             }
+            mUid = mFirebaseUser.getUid();
         }
+    }
 
+    public void addHive(View view) {
         // Get location
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
+        Location lastKnown = null;
         // Define a listener that responds to location updates
         LocationListener locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
@@ -70,17 +76,31 @@ public class AddHive extends AppCompatActivity {
 
         // Register the listener with the Location Manager to receive location updates
         try {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+            //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+            lastKnown = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         } catch (SecurityException e) {
             e.printStackTrace();
         }
 
+        double lat = 0, longi = 0;
+        try {
+            lat = lastKnown.getLatitude();
+            longi = lastKnown.getLongitude();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        TextView tv = (TextView)findViewById(R.id.textView19);
+        tv.setText(Double.toString(lat) + ", " + Double.toString(longi));
         // Create Hive
         String hiveName = ((EditText)findViewById(R.id.add_hive_name)).getText().toString();
-        Hive hive = new Hive(hiveName, loc.toString());
+        Hive hive = new Hive(hiveName, Double.toString(lat) + ", " + Double.toString(longi));
 
-        // TODO: Upload this Hive to the database.
 
+
+        // Upload to database
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/users/" + mFirebaseUser.getUid());
+        ref.push().setValue(hive);
     }
 
 }
