@@ -47,7 +47,7 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
 
         GoogleSignInOptions gso = new GoogleSignInOptions
                 .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestIdToken("386695389370-ag6u8l259h300bnpcvblmfm2gja7p9g0.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
 
