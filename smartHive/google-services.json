@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "386695389370",
+    "firebase_url": "https://smarthive-229a5.firebaseio.com",
+    "project_id": "smarthive-229a5",
+    "storage_bucket": "smarthive-229a5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:386695389370:android:263ea1c5f7670fe8",
+        "android_client_info": {
+          "package_name": "nottoobee.toobee.smarthive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "386695389370-ga6bop58adl8fsmgf2njrmqce95jlc0n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "nottoobee.toobee.smarthive",
+            "certificate_hash": "5149963EBDB8EB3A41D90A8C61A4182BE0B7B6C6"
+          }
+        },
+        {
+          "client_id": "386695389370-ag6u8l259h300bnpcvblmfm2gja7p9g0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9IGcJAav5TNP3c83_hViII1Aq_FtzpQ8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "386695389370-ag6u8l259h300bnpcvblmfm2gja7p9g0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
