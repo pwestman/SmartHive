@@ -4,10 +4,12 @@
 
 package nottoobee.toobee.smarthive;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
 public class HiveInfo extends AppCompatActivity {
 
@@ -28,6 +30,8 @@ public class HiveInfo extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        Intent i = getIntent();
         ab.setDisplayUseLogoEnabled(true);
+        ((TextView)findViewById(R.id.info_hive_name)).setText(i.getStringExtra("hiveName"));
     }
 }

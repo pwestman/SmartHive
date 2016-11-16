@@ -20,7 +20,7 @@ public class Hive {
     private String name;
     private String location;
     private long date_created;
-    private Data[] data;
+    private Data data;
 
     public Hive() {
     }
@@ -43,7 +43,7 @@ public class Hive {
         return date_created;
     }
 
-    public Data[] getData() {
+    public Data getData() {
         return data;
     }
 }
