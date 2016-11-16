@@ -5,10 +5,12 @@
 package nottoobee.toobee.smarthive;
 
 import android.*;
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
+import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
@@ -16,6 +18,7 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -27,6 +30,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.FusedLocationProviderApi;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -35,7 +43,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.List;
 import java.util.Locale;
 
-public class AddHive extends AppCompatActivity {
+public class AddHive extends AppCompatActivity implements LocationListener{
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
@@ -43,6 +51,11 @@ public class AddHive extends AppCompatActivity {
     private String mUsername;
     private String mPhotoUrl;
     private String mUid;
+    private String provider;
+    private LocationManager locationManager;
+    private double lat;
+    private double longi;
+    TextView tv;
     private static final int MY_PERMISSION_REQUEST_FINE_LOCATION = 1;
     private boolean permissionIsGranted = false;
     private Location loc;
@@ -69,70 +82,56 @@ public class AddHive extends AppCompatActivity {
             }
             mUid = mFirebaseUser.getUid();
         }
+
     }
 
     public void addHive(View view) {
-         if(permissionIsGranted) {
-             // Get location
-             LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        if(permissionIsGranted) {
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            Criteria criteria = new Criteria();
+            provider = locationManager.getBestProvider(criteria, false);
 
-             Location lastKnown = null;
-             // Define a listener that responds to location updates
-             LocationListener locationListener = new LocationListener() {
-                 public void onLocationChanged(Location location) {
-                     loc = location;
-                 }
+            if (provider != null && !provider.equals("")) {
 
-                 public void onStatusChanged(String provider, int status, Bundle extras) {
-                 }
+                // Get the location from the given provider
+                if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSION_REQUEST_FINE_LOCATION);
+                    }
+                }
 
-                 public void onProviderEnabled(String provider) {
-                 }
+                locationManager.requestLocationUpdates(provider, 20000, 1, this);
 
-                 public void onProviderDisabled(String provider) {
-                 }
-             };
-
-             // Register the listener with the Location Manager to receive location updates
-             try {
-                 //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-                 lastKnown = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-             } catch (SecurityException e) {
-                 e.printStackTrace();
-             }
-
-             double lat = 0, longi = 0;
-             try {
-                 lat = lastKnown.getLatitude();
-                 longi = lastKnown.getLongitude();
-             } catch (Exception e) {
-                 e.printStackTrace();
-             }
-
-             TextView tv = (TextView) findViewById(R.id.textView19);
-             tv.setText(Double.toString(lat) + ", " + Double.toString(longi));
-             // Create Hive
-             String hiveName = ((EditText) findViewById(R.id.add_hive_name)).getText().toString();
-             Hive hive = new Hive(hiveName, Double.toString(lat) + ", " + Double.toString(longi));
+                Location location = locationManager.getLastKnownLocation(provider);
 
 
-             // Upload to database
-             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/users/" + mFirebaseUser.getUid());
-             ref.push().setValue(hive);
-         }else{checkPerm();}
+                if (location != null)
+                    onLocationChanged(location);
+                else
+                    Toast.makeText(getBaseContext(), "Location can't be retrieved", Toast.LENGTH_SHORT).show();
+
+            } else {
+                Toast.makeText(getBaseContext(), "No Provider Found", Toast.LENGTH_SHORT).show();
+            }
+
+
+            tv = (TextView) findViewById(R.id.textView19);
+            tv.setText(Double.toString(lat) + ", " + Double.toString(longi));
+            // Create Hive
+            String hiveName = ((EditText) findViewById(R.id.add_hive_name)).getText().toString();
+            Hive hive = new Hive(hiveName, Double.toString(lat) + ", " + Double.toString(longi));
+
+
+            // Upload to database
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/users/" + mFirebaseUser.getUid());
+            ref.push().setValue(hive);
+        }else{checkPerm();}
     }
 
     public void checkPerm(){
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(new String[] {android.Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSION_REQUEST_FINE_LOCATION);
             }
@@ -154,4 +153,30 @@ public class AddHive extends AppCompatActivity {
                 break;
         }
     }
+
+
+    @Override
+    public void onLocationChanged(Location location) {
+        lat = location.getLatitude();
+        longi = location.getLongitude();
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+        Toast.makeText(this, "Enabled new provider " + provider,
+                Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+        Toast.makeText(this, "Disabled provider " + provider,
+                Toast.LENGTH_SHORT).show();
+    }
+
+
 }
