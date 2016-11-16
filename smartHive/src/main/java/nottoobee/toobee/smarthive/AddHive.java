@@ -86,7 +86,8 @@ public class AddHive extends AppCompatActivity implements LocationListener{
     }
 
     public void addHive(View view) {
-        if(permissionIsGranted) {
+        checkPerm();
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             Criteria criteria = new Criteria();
             provider = locationManager.getBestProvider(criteria, false);
@@ -94,12 +95,6 @@ public class AddHive extends AppCompatActivity implements LocationListener{
             if (provider != null && !provider.equals("")) {
 
                 // Get the location from the given provider
-                if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSION_REQUEST_FINE_LOCATION);
-                    }
-                }
-
                 locationManager.requestLocationUpdates(provider, 20000, 1, this);
 
                 Location location = locationManager.getLastKnownLocation(provider);
@@ -125,7 +120,7 @@ public class AddHive extends AppCompatActivity implements LocationListener{
             // Upload to database
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/users/" + mFirebaseUser.getUid());
             ref.push().setValue(hive);
-        }else{checkPerm();}
+        }
     }
 
     public void checkPerm(){
@@ -144,11 +139,9 @@ public class AddHive extends AppCompatActivity implements LocationListener{
         switch (requestCode){
             case MY_PERMISSION_REQUEST_FINE_LOCATION:
                 if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    permissionIsGranted = true;
+                    Toast.makeText(getApplicationContext(), "Permissions granted!", Toast.LENGTH_SHORT).show();
                 }else {
-                    permissionIsGranted = false;
-                    Toast.makeText(getApplicationContext(), "Location permissions required to be granted", Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(getApplicationContext(), "Location permissions required to be granted!", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
