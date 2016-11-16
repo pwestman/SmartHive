@@ -5,17 +5,10 @@
 package nottoobee.toobee.smarthive;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.drawable.Drawable;
-import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Layout;
-import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,7 +17,6 @@ import android.widget.ArrayAdapter;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -43,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     private String mUsername;
     private String mPhotoUrl;
     private int numHives = 0;
+    TextView hive1, hive2, hive3, hive4;
+    ImageView h1, h2, h3, h4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +61,18 @@ public class MainActivity extends AppCompatActivity {
         addDrawerItems();
 
         // TODO: Remove these once the placement of hive graphics once the GridLayout is working.
-        drawHive(new Hive("Hive 1", "gps coordinates"), (GridLayout)findViewById(R.id.hive_display));
-        drawHive(new Hive("Hive 2", "gps coordinates"), (GridLayout)findViewById(R.id.hive_display));
+        //drawHive(new Hive("Hive 1", "gps coordinates"), (GridLayout)findViewById(R.id.hive_display));
+        //drawHive(new Hive("Hive 2", "gps coordinates"), (GridLayout)findViewById(R.id.hive_display));
+
+        hive1 = (TextView) findViewById(R.id.textView);
+        hive2 = (TextView) findViewById(R.id.textView2);
+        hive3 = (TextView) findViewById(R.id.textView3);
+        hive4 = (TextView) findViewById(R.id.textView4);
+
+        h1 = (ImageView) findViewById(R.id.imageView5);
+        h2 = (ImageView) findViewById(R.id.imageView4);
+        h3 = (ImageView) findViewById(R.id.imageView6);
+        h4 = (ImageView) findViewById(R.id.imageView7);
 
         // Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();

@@ -21,43 +21,109 @@
             android:layout_height="wrap_content"
             android:id="@+id/include" />
 
-        <GridLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:background="@drawable/layer_5"
-            android:layout_below="@+id/include"
+            android:layout_centerHorizontal="true"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
-            android:layout_marginBottom="60dp"
-            android:layout_marginTop="60dp"
-            android:columnCount="2"
-            android:id="@+id/hive_display">
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_below="@+id/include">
 
-            <!--
-            <TextView
-                android:text="@string/hive_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="75dp"
-                android:layout_marginTop="35dp"
-                android:id="@+id/textView"
-                android:textStyle="normal|bold" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/hive_green"
                 android:id="@+id/imageView4"
-                android:layout_below="@id/textView"
                 android:onClick="getinfo"
-                android:layout_marginTop="25dp"
-                android:layout_marginStart="35dp" />
-                -->
+                android:layout_above="@+id/imageView6"
+                android:layout_alignParentEnd="true"
+                android:visibility="visible"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="47dp" />
 
-        </GridLayout>
+            <TextView
+                android:text="@string/hive_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView3"
+                android:textStyle="normal|bold"
+                android:layout_marginBottom="10dp"
+                android:layout_above="@+id/imageView6"
+                android:visibility="visible"
+                android:layout_alignEnd="@+id/imageView5"
+                android:layout_marginEnd="31dp" />
+
+            <TextView
+                android:text="@string/hive_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView"
+                android:textStyle="normal|bold"
+                android:layout_marginBottom="14dp"
+                android:layout_above="@+id/imageView5"
+                android:visibility="visible"
+                android:layout_alignStart="@+id/textView3" />
+
+            <TextView
+                android:text="@string/hive_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView2"
+                android:textStyle="normal|bold"
+                android:layout_alignBaseline="@+id/textView"
+                android:layout_alignBottom="@+id/textView"
+                android:layout_alignStart="@+id/imageView4"
+                android:visibility="visible"
+                android:layout_marginStart="34dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/hive_green"
+                android:id="@+id/imageView6"
+                android:onClick="getinfo"
+                android:layout_marginBottom="64dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:visibility="visible"
+                android:layout_marginStart="36dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/hive_green"
+                android:id="@+id/imageView7"
+                android:onClick="getinfo"
+                android:visibility="visible"
+                android:layout_alignBottom="@+id/imageView6"
+                android:layout_alignStart="@+id/imageView4" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/hive_green"
+                android:id="@+id/imageView5"
+                android:onClick="getinfo"
+                android:visibility="visible"
+                android:layout_alignTop="@+id/imageView4"
+                android:layout_alignStart="@+id/imageView6" />
+
+            <TextView
+                android:text="@string/hive_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView4"
+                android:textStyle="normal|bold"
+                android:visibility="visible"
+                android:layout_alignBaseline="@+id/textView3"
+                android:layout_alignBottom="@+id/textView3"
+                android:layout_alignStart="@+id/textView2" />
+
+        </RelativeLayout>
 
     </RelativeLayout>
 
