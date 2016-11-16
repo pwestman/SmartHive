@@ -18,13 +18,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-<<<<<<< HEAD
-=======
-        android:hint="@string/name"
->>>>>>> f4e889f475f81adf450e31e88887dae3cd5504d0
         android:ems="10"
         android:id="@+id/add_hive_name"
-        android:hint="Name" />
+        android:hint="@string/addHint" />
 
     <Button
         android:text="@string/add_hive"

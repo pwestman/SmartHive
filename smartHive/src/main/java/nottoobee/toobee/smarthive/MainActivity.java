@@ -11,12 +11,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-<<<<<<< HEAD
-import android.text.Layout;
 import android.util.Log;
-import android.view.Display;
-=======
->>>>>>> f4e889f475f81adf450e31e88887dae3cd5504d0
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
