@@ -142,5 +142,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void newHive(MenuItem item) {
         startActivity(new Intent(this, AddHive.class));
+
+        if(hive1.getVisibility() == View.INVISIBLE && h1.getVisibility() == View.INVISIBLE){
+            hive1.setVisibility(View.VISIBLE);
+            h1.setVisibility(View.VISIBLE);
+        } else if(hive2.getVisibility() == View.INVISIBLE && h2.getVisibility() == View.INVISIBLE){
+            hive2.setVisibility(View.VISIBLE);
+            h2.setVisibility(View.VISIBLE);
+        } else if(hive3.getVisibility() == View.INVISIBLE && h3.getVisibility() == View.INVISIBLE){
+            hive3.setVisibility(View.VISIBLE);
+            h3.setVisibility(View.VISIBLE);
+        } else if(hive4.getVisibility() == View.INVISIBLE && h4.getVisibility() == View.INVISIBLE){
+            hive4.setVisibility(View.VISIBLE);
+            h4.setVisibility(View.VISIBLE);
+        }
     }
 }

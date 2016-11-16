@@ -38,7 +38,7 @@
                 app:srcCompat="@drawable/hive_green"
                 android:id="@+id/imageView6"
                 android:onClick="getinfo"
-                android:visibility="visible"
+                android:visibility="invisible"
                 android:layout_alignParentBottom="true"
                 android:layout_alignStart="@+id/imageView4" />
 
@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/textView2"
                 android:textStyle="normal|bold"
-                android:visibility="visible"
+                android:visibility="invisible"
                 android:layout_alignParentTop="true"
                 android:layout_alignStart="@+id/imageView5"
                 android:layout_marginStart="28dp" />
@@ -60,7 +60,7 @@
                 android:layout_marginStart="121dp"
                 android:id="@+id/textView"
                 android:textStyle="normal|bold"
-                android:visibility="visible"
+                android:visibility="invisible"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true" />
 
@@ -70,7 +70,7 @@
                 app:srcCompat="@drawable/hive_green"
                 android:id="@+id/imageView5"
                 android:onClick="getinfo"
-                android:visibility="visible"
+                android:visibility="invisible"
                 android:layout_marginEnd="81dp"
                 android:layout_alignTop="@+id/imageView4"
                 android:layout_alignParentEnd="true" />
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/textView3"
                 android:textStyle="normal|bold"
-                android:visibility="visible"
+                android:visibility="invisible"
                 android:layout_alignParentBottom="true"
                 android:layout_alignStart="@+id/textView"
                 android:layout_marginBottom="132dp" />
@@ -93,7 +93,7 @@
                 android:id="@+id/imageView4"
                 android:onClick="getinfo"
                 android:layout_marginStart="80dp"
-                android:visibility="visible"
+                android:visibility="invisible"
                 android:layout_below="@+id/textView"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="10dp" />
@@ -104,7 +104,7 @@
                 app:srcCompat="@drawable/hive_green"
                 android:id="@+id/imageView7"
                 android:onClick="getinfo"
-                android:visibility="visible"
+                android:visibility="invisible"
                 android:layout_alignTop="@+id/imageView6"
                 android:layout_alignStart="@+id/imageView5" />
 
@@ -115,7 +115,7 @@
                 android:id="@+id/textView4"
                 android:textStyle="normal|bold"
                 android:layout_marginStart="12dp"
-                android:visibility="visible"
+                android:visibility="invisible"
                 android:layout_alignBaseline="@+id/textView3"
                 android:layout_alignBottom="@+id/textView3"
                 android:layout_alignStart="@+id/textView2" />

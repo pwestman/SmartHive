@@ -41,7 +41,7 @@
                 android:onClick="getinfo"
                 android:layout_above="@+id/imageView6"
                 android:layout_alignParentEnd="true"
-                android:visibility="visible"
+                android:visibility="invisible"
                 android:layout_marginEnd="25dp"
                 android:layout_marginBottom="47dp" />
 
@@ -53,7 +53,7 @@
                 android:textStyle="normal|bold"
                 android:layout_marginBottom="10dp"
                 android:layout_above="@+id/imageView6"
-                android:visibility="visible"
+                android:visibility="invisible"
                 android:layout_alignEnd="@+id/imageView5"
                 android:layout_marginEnd="31dp" />
 
@@ -65,7 +65,7 @@
                 android:textStyle="normal|bold"
                 android:layout_marginBottom="14dp"
                 android:layout_above="@+id/imageView5"
-                android:visibility="visible"
+                android:visibility="invisible"
                 android:layout_alignStart="@+id/textView3" />
 
             <TextView
@@ -77,7 +77,7 @@
                 android:layout_alignBaseline="@+id/textView"
                 android:layout_alignBottom="@+id/textView"
                 android:layout_alignStart="@+id/imageView4"
-                android:visibility="visible"
+                android:visibility="invisible"
                 android:layout_marginStart="34dp" />
 
             <ImageView
@@ -89,7 +89,7 @@
                 android:layout_marginBottom="64dp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
-                android:visibility="visible"
+                android:visibility="invisible"
                 android:layout_marginStart="36dp" />
 
             <ImageView
@@ -98,7 +98,7 @@
                 app:srcCompat="@drawable/hive_green"
                 android:id="@+id/imageView7"
                 android:onClick="getinfo"
-                android:visibility="visible"
+                android:visibility="invisible"
                 android:layout_alignBottom="@+id/imageView6"
                 android:layout_alignStart="@+id/imageView4" />
 
@@ -108,7 +108,7 @@
                 app:srcCompat="@drawable/hive_green"
                 android:id="@+id/imageView5"
                 android:onClick="getinfo"
-                android:visibility="visible"
+                android:visibility="invisible"
                 android:layout_alignTop="@+id/imageView4"
                 android:layout_alignStart="@+id/imageView6" />
 
@@ -118,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/textView4"
                 android:textStyle="normal|bold"
-                android:visibility="visible"
+                android:visibility="invisible"
                 android:layout_alignBaseline="@+id/textView3"
                 android:layout_alignBottom="@+id/textView3"
                 android:layout_alignStart="@+id/textView2" />
