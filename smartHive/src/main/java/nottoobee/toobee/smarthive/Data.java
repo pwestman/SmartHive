@@ -8,7 +8,7 @@ import java.util.Date;
 
 
 public class Data {
-    private Date date;
+    private long date;
     private int humidity;
     private int temperature;
     private int population;
@@ -17,7 +17,7 @@ public class Data {
     public Data() {
     }
 
-    public Data(Date date, int humidity, int temperature, int population, int weight) {
+    public Data(long date, int humidity, int temperature, int population, int weight) {
         this.date = date;
         this.humidity = humidity;
         this.temperature = temperature;
@@ -25,7 +25,7 @@ public class Data {
         this.weight = weight;
     }
 
-    public Date getDate() {
+    public long getDate() {
         return date;
     }
 
