@@ -15,6 +15,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Layout;
+import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,8 +31,11 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -42,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser mFirebaseUser;
     private String mUsername;
     private String mPhotoUrl;
+    private GridLayout grid;
     private int numHives = 0;
 
     @Override
@@ -50,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mDrawerList = (ListView)findViewById(R.id.navList);
+        grid = (GridLayout)findViewById(R.id.hive_display);
 
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
@@ -67,8 +73,8 @@ public class MainActivity extends AppCompatActivity {
         addDrawerItems();
 
         // TODO: Remove these once the placement of hive graphics once the GridLayout is working.
-        drawHive(new Hive("Hive 1", "gps coordinates"), (GridLayout)findViewById(R.id.hive_display));
-        drawHive(new Hive("Hive 2", "gps coordinates"), (GridLayout)findViewById(R.id.hive_display));
+        //drawHive(new Hive("Hive 1", "gps coordinates"), (GridLayout)findViewById(R.id.hive_display));
+        //drawHive(new Hive("Hive 2", "gps coordinates"), (GridLayout)findViewById(R.id.hive_display));
 
         // Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -85,9 +91,24 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        //TODO: Finish getting user's hives.
         // Database connection - Get DB reference that corresponds to active user.
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(mFirebaseUser.getUid());
+        DatabaseReference ref = FirebaseDatabase.getInstance()
+                .getReference("/users/" + mFirebaseUser.getUid());
+        ref.limitToLast(5).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                grid.removeAllViews();
+                for (DataSnapshot msgSnapshot: snapshot.getChildren()) {
+                    Hive hive = msgSnapshot.getValue(Hive.class);
+                    Log.i("Hive", hive.getName());
+                    drawHive(hive, grid);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError firebaseError) {
+                Log.e("Hive", "The read failed: " + firebaseError.getMessage());
+            }
+        });
 
     }
 
