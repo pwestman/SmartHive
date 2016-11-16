@@ -9,14 +9,14 @@
     <string name="hive">Ruche</string>
     <string name="temperature">Température:</string>
     <string name="last_inspection">Dernière inspection:</string>
-    <string name="weight">Weight:</string>
-    <string name="population">Poids(approximatif):</string>
+    <string name="weight">Poids(approximatif):</string>
+    <string name="population">Population:</string>
     <string name="timer">Temporisateur de récupération</string>
     <string name="units">Unités</string>
     <string name="language">La langue</string>
     <string name="welcome">Bienvenue</string>
     <string name="name">Prénom</string>
-    <string name="log_in">S'identifier</string>
+    <string name="log_in">S\'identifier</string>
     <string name="nameIn">Prénom:</string>
     <string name="passwordIn">Mot de passe:</string>
     <string name="title_activity_add_hive">Ajouter une ruche</string>
