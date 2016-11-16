@@ -31,6 +31,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Date;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -154,10 +156,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(MainActivity.this, HiveInfo.class);
                 i.putExtra("hiveName", newHive.getName());
                 i.putExtra("hiveLocation", newHive.getLocation());
-                i.putExtra("hiveDataWeight", newHive.getData().getWeight());
-                i.putExtra("hiveDataTemp", newHive.getData().getTemperature());
-                i.putExtra("hiveDataDate", newHive.getData().getDate());
-                i.putExtra("hiveDataPop", newHive.getData().getPopulation());
+                i.putExtra("hiveDataWeight", Integer.toString(newHive.getData().getWeight()));
+                i.putExtra("hiveDataTemp", Integer.toString(newHive.getData().getTemperature()));
+                i.putExtra("hiveDataDate", new Date(newHive.getData().getDate()));
+                i.putExtra("hiveDataPop", Integer.toString(newHive.getData().getPopulation()));
                 startActivity(i);
             }
         });

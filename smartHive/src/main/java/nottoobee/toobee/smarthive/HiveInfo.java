@@ -33,5 +33,9 @@ public class HiveInfo extends AppCompatActivity {
         Intent i = getIntent();
         ab.setDisplayUseLogoEnabled(true);
         ((TextView)findViewById(R.id.info_hive_name)).setText(i.getStringExtra("hiveName"));
+        ((TextView)findViewById(R.id.info_population)).setText(i.getStringExtra("hiveDataPop"));
+        ((TextView)findViewById(R.id.info_temp)).setText(i.getStringExtra("hiveDataTemp"));
+        ((TextView)findViewById(R.id.info_date)).setText(i.getStringExtra("hiveDataDate"));
+        ((TextView)findViewById(R.id.info_weight)).setText(i.getStringExtra("hiveDataWeight"));
     }
 }
