@@ -4,9 +4,11 @@
 
 package nottoobee.toobee.smarthive;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
         ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
 
         try {
             ab.setDisplayShowHomeEnabled(true);
@@ -156,5 +159,33 @@ public class MainActivity extends AppCompatActivity {
             hive4.setVisibility(View.VISIBLE);
             h4.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public void onBackPressed(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Exit Application?");
+
+        alertDialogBuilder
+                .setMessage("Click yes to exit")
+                .setCancelable(false)
+                .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        // if this button is clicked, close
+                        // current activity
+                        MainActivity.this.finish();
+                    }
+                })
+                .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        // if this button is clicked, just close
+                        // the dialog box and do nothing
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        alertDialog.show();
     }
 }

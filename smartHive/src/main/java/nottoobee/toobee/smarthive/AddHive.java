@@ -10,8 +10,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -31,6 +30,7 @@ public class AddHive extends AppCompatActivity {
     private String mPhotoUrl;
     private String mUid;
     private Location loc;
+    String add;
 
     // TODO: Validate all fields.
     @Override
@@ -39,6 +39,10 @@ public class AddHive extends AppCompatActivity {
         setContentView(R.layout.activity_add_hive);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
+        ab.setTitle("Add Hive");
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
