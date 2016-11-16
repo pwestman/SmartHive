@@ -19,7 +19,7 @@ import java.util.Date;
 public class Hive {
     private String name;
     private String location;
-    private Date date_created;
+    private long date_created;
     private Data[] data;
 
     public Hive() {
@@ -28,7 +28,7 @@ public class Hive {
     public Hive(String name, String location) {
         this.name = name;
         this.location = location;
-        this.date_created = new Date();
+        this.date_created = new Date().getTime();
     }
 
     public String getName() {
@@ -39,7 +39,7 @@ public class Hive {
         return location;
     }
 
-    public Date getDate_created() {
+    public long getDate_created() {
         return date_created;
     }
 
