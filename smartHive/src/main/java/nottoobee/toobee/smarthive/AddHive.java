@@ -4,45 +4,32 @@
 
 package nottoobee.toobee.smarthive;
 
-import android.*;
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Address;
 import android.location.Criteria;
-import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.FusedLocationProviderApi;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.List;
-import java.util.Locale;
+import java.util.ArrayList;
 
 public class AddHive extends AppCompatActivity implements LocationListener{
 
@@ -60,6 +47,7 @@ public class AddHive extends AppCompatActivity implements LocationListener{
     private static final int MY_PERMISSION_REQUEST_FINE_LOCATION = 1;
     private boolean permissionIsGranted = false;
     private Location loc;
+    private ArrayList<String> hiveNames;
 
     // TODO: Validate all fields.
     @Override
@@ -75,6 +63,7 @@ public class AddHive extends AppCompatActivity implements LocationListener{
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
+        hiveNames = new ArrayList<>();
         if (mFirebaseUser == null) {
             startActivity(new Intent(this, SignIn.class));
             finish();
@@ -123,7 +112,30 @@ public class AddHive extends AppCompatActivity implements LocationListener{
 
             // Upload to database
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/users/" + mFirebaseUser.getUid());
-            ref.push().setValue(hive);
+            hiveNames = MainActivity.getHiveNameList();
+            //checking if there are any gaps in numbering, which could appear when user deletes hive with middle index
+            if(!hiveNames.isEmpty()) {
+                int index = 0;
+                boolean check = true;
+                for (int i = 1; i <= hiveNames.size(); i++) {
+                    if (check) {
+                        if (!hiveNames.get(i - 1).equals(Integer.toString(i))) {
+                            index = i;
+                            check = false;
+
+                        }
+                    }
+                }
+                //if no problem with indexing, it assigns the last index
+                if (index == 0) {
+                    index = hiveNames.size() + 1;
+                }
+
+                ref.child(Integer.toString(index)).setValue(hive);
+            }else{
+                ref.child("1").setValue(hive);
+            }
+            ref.push();
         }
     }
 

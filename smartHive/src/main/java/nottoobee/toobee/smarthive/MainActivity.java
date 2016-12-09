@@ -31,6 +31,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private String mPhotoUrl;
     private GridLayout grid;
     private int numHives = 0;
+    private static ArrayList <String> hiveName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,9 +85,10 @@ public class MainActivity extends AppCompatActivity {
             mUsername = mFirebaseUser.getDisplayName();
             if (mFirebaseUser.getPhotoUrl() != null) {
                 mPhotoUrl = mFirebaseUser.getPhotoUrl().toString();
-            }
-        }
+    }
+}
 
+        hiveName = new ArrayList<>();
         // Database connection - Get DB reference that corresponds to active user.
         DatabaseReference ref = FirebaseDatabase.getInstance()
                 .getReference("/users/" + mFirebaseUser.getUid());
@@ -92,10 +96,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 grid.removeAllViews();
+                hiveName.clear();
                 for (DataSnapshot msgSnapshot: snapshot.getChildren()) {
                     Hive hive = msgSnapshot.getValue(Hive.class);
-                    Log.i("Hive", hive.getName());
                     drawHive(hive, grid);
+                    hiveName.add(msgSnapshot.getKey());
                 }
             }
             @Override
@@ -135,8 +140,8 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Creates a graphical representation of the given Hive in the given GridLayout.
-     * @param hive
-     * @param layout
+     * @param hive hive object
+     * @param layout the GridLayout layout on the main screen, where the hive objects will be inflated
      */
     private void drawHive(Hive hive, GridLayout layout) {
         // TODO: Pretty this up to make it look like the mockup.
@@ -153,6 +158,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void newHive(MenuItem item) {
         startActivity(new Intent(this, AddHive.class));
+    }
+
+    public static ArrayList getHiveNameList(){
+        return hiveName;
     }
 
     @Override
