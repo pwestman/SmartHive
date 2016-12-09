@@ -32,6 +32,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -145,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void drawHive(Hive hive, GridLayout layout) {
         // TODO: Pretty this up to make it look like the mockup.
+        final Hive newHive = hive;
         LinearLayout ln = new LinearLayout(this);
         layout.addView(ln);
         TextView tv = new TextView(this);
@@ -153,6 +155,18 @@ public class MainActivity extends AppCompatActivity {
         ln.addView(tv);
         ImageView iv = new ImageView(this);
         iv.setImageResource(R.drawable.hive_green);
+        iv.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, HiveInfo.class);
+                i.putExtra("hiveName", newHive.getName());
+                i.putExtra("hiveLocation", newHive.getLocation());
+                i.putExtra("hiveDataWeight", Integer.toString(newHive.getData().getWeight()));
+                i.putExtra("hiveDataTemp", Integer.toString(newHive.getData().getTemperature()));
+                i.putExtra("hiveDataDate", new Date(newHive.getData().getDate()));
+                i.putExtra("hiveDataPop", Integer.toString(newHive.getData().getPopulation()));
+                startActivity(i);
+            }
+        });
         ln.addView(iv);
     }
 
