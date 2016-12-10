@@ -21,5 +21,7 @@
     <string name="title_activity_hive_map">HiveMap</string>
     <string name="title_activity_add_hive">Add Hive</string>
     <string name="addHint">Name</string>
+    <string name="drawer_open">Drawer open</string>
+    <string name="drawer_closed">Drawer closed</string>
     >>>>>>> f4e889f475f81adf450e31e88887dae3cd5504d0
 </resources>
