@@ -31,8 +31,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.TimeZone;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -162,8 +164,14 @@ public class MainActivity extends AppCompatActivity {
                 i.putExtra("hiveLocation", newHive.getLocation());
                 i.putExtra("hiveDataWeight", Integer.toString(newHive.getData().getWeight()));
                 i.putExtra("hiveDataTemp", Integer.toString(newHive.getData().getTemperature()));
-                i.putExtra("hiveDataDate", new Date(newHive.getData().getDate()));
+
+                Date date = new Date(newHive.getData().getDate()*1000L); // *1000 is to convert seconds to milliseconds
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd/MM/yy"); // the format of the date
+                sdf.setTimeZone(TimeZone.getTimeZone("GMT-5")); // timezone reference
+                String formattedDate = sdf.format(date);
+                i.putExtra("hiveDataDate", formattedDate);
                 i.putExtra("hiveDataPop", Integer.toString(newHive.getData().getPopulation()));
+                Log.i("time", new Date(newHive.getData().getDate()).toString());
                 startActivity(i);
             }
         });

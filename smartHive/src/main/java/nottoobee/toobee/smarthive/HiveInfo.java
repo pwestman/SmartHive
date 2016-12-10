@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.TextView;
 
 public class HiveInfo extends AppCompatActivity {
@@ -37,5 +38,6 @@ public class HiveInfo extends AppCompatActivity {
         ((TextView)findViewById(R.id.info_temp)).setText(i.getStringExtra("hiveDataTemp"));
         ((TextView)findViewById(R.id.info_date)).setText(i.getStringExtra("hiveDataDate"));
         ((TextView)findViewById(R.id.info_weight)).setText(i.getStringExtra("hiveDataWeight"));
+        //Log.i("Time", i.getStringExtra("hiveDataDate"));
     }
 }
