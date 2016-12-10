@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
         iv.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, HiveInfo.class);
-                i.putExtra("hiveName", newHive.getName());
+                i.putExtra("hive", newHive);
                 i.putExtra("hiveLocation", newHive.getLocation());
                 i.putExtra("hiveDataWeight", Integer.toString(newHive.getData().getWeight()));
                 i.putExtra("hiveDataTemp", Integer.toString(newHive.getData().getTemperature()));
