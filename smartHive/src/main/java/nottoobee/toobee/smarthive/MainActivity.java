@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private String mPhotoUrl;
     private GridLayout grid;
     private int numHives = 0;
+    private static DatabaseReference ref;
     private static ArrayList <String> hiveName;
 
     @Override
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
         hiveName = new ArrayList<>();
         // Database connection - Get DB reference that corresponds to active user.
-        DatabaseReference ref = FirebaseDatabase.getInstance()
+        ref = FirebaseDatabase.getInstance()
                 .getReference("/users/" + mFirebaseUser.getUid());
         ref.limitToLast(5).addValueEventListener(new ValueEventListener() {
             @Override
@@ -171,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
                 String formattedDate = sdf.format(date);
                 i.putExtra("hiveDataDate", formattedDate);
                 i.putExtra("hiveDataPop", Integer.toString(newHive.getData().getPopulation()));
+                i.putExtra("hiveKey", newHive.getKey());
                 Log.i("time", new Date(newHive.getData().getDate()).toString());
                 startActivity(i);
             }
@@ -180,6 +182,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void newHive(MenuItem item) {
         startActivity(new Intent(this, AddHive.class));
+    }
+
+    public static void deleteHive(String name){
+        ref.child(name).removeValue();
     }
 
     public static ArrayList getHiveNameList(){

@@ -130,9 +130,10 @@ public class AddHive extends AppCompatActivity implements LocationListener{
                 if (index == 0) {
                     index = hiveNames.size() + 1;
                 }
-
+                hive.setKey(Integer.toString(index));
                 ref.child(Integer.toString(index)).setValue(hive);
             }else{
+                hive.setKey("1");
                 ref.child("1").setValue(hive);
             }
             ref.push();

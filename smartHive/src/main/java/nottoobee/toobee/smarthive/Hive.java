@@ -21,6 +21,7 @@ public class Hive {
     private String location;
     private long date_created;
     private Data data;
+    private String key;
 
     public Hive() {
     }
@@ -45,5 +46,13 @@ public class Hive {
 
     public Data getData() {
         return data;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = (key);
     }
 }

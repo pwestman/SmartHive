@@ -11,7 +11,8 @@
         layout="@layout/tool_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/include" />
+        android:id="@+id/include"
+        />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -71,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:textColor="@color/ok"
+            android:textColor="@color/good"
             android:layout_below="@id/info_temp_label"
             android:layout_marginEnd="75dp"
             android:layout_marginTop="25dp"
