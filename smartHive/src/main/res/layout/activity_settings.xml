@@ -25,56 +25,47 @@
         android:id="@+id/relativeLayout2">
 
         <TextView
-            android:text="@string/language"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="50dp"
-            android:id="@+id/textView13" />
-
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="35dp"
-            android:layout_marginTop="50dp"
-            android:id="@+id/spinner" />
-
-        <TextView
             android:text="@string/units"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textView13"
             android:layout_marginStart="35dp"
             android:layout_marginTop="50dp"
-            android:id="@+id/textView14" />
+            android:id="@+id/units"
+            android:textSize="20sp"/>
 
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textView13"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="35dp"
             android:layout_marginTop="50dp"
-            android:id="@+id/spinner2" />
+            android:id="@+id/unitSpin" />
+
+        <Button
+            android:text="@string/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/submit_changes"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="98dp" />
 
         <TextView
             android:text="@string/timer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textView14"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="50dp"
-            android:id="@+id/textView15" />
+            android:layout_marginTop="26dp"
+            android:id="@+id/timer"
+            android:layout_below="@+id/unitSpin"
+            android:layout_alignStart="@+id/units"
+            android:textSize="20sp"/>
 
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textView14"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="35dp"
-            android:layout_marginTop="50dp"
-            android:id="@+id/spinner3" />
+            android:id="@+id/timerSpin"
+            android:layout_alignTop="@+id/timer"
+            android:layout_alignStart="@+id/unitSpin" />
     </RelativeLayout>
 
 </RelativeLayout>
