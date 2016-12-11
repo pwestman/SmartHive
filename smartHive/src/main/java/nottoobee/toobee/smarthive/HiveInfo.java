@@ -43,6 +43,7 @@ public class HiveInfo extends AppCompatActivity {
         ((TextView)findViewById(R.id.info_temp)).setText(i.getStringExtra("hiveDataTemp"));
         ((TextView)findViewById(R.id.info_date)).setText(i.getStringExtra("hiveDataDate"));
         ((TextView)findViewById(R.id.info_weight)).setText(i.getStringExtra("hiveDataWeight"));
+        ((TextView)findViewById(R.id.info_humidity)).setText(i.getStringExtra("hiveHumidity") + " %");
 
         hiveKey = i.getStringExtra("hiveKey");
     }

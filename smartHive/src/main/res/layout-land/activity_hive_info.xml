@@ -35,15 +35,13 @@
             android:textStyle="normal|bold" />
 
         <TextView
-            android:text="18° C"
+            android:text="Humidity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/info_hive_name"
-            android:textColor="@color/bad"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="200dp"
-            android:layout_marginTop="50dp"
-            android:id="@+id/info_temp" />
+            android:layout_below="@id/info_temp_label"
+            android:layout_marginTop="16dp"
+            android:layout_alignEnd="@id/info_temp_label"
+            android:id="@+id/info_humidity_label" />
 
         <TextView
             android:text="@string/last_inspection"
@@ -51,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/info_temp_label"
             android:layout_marginStart="75dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="50dp"
             android:id="@+id/info_date_label" />
 
         <TextView
@@ -62,7 +60,7 @@
             android:textColor="@color/good"
             android:layout_below="@id/info_temp_label"
             android:layout_marginEnd="200dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="50dp"
             android:id="@+id/info_date" />
 
         <TextView
@@ -125,6 +123,25 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="13dp"
             android:layout_marginTop="13dp" />
+
+        <TextView
+            android:text="18° C"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/bad"
+            android:id="@+id/info_temp"
+            android:layout_above="@+id/info_date"
+            android:layout_alignEnd="@+id/info_date" />
+
+        <TextView
+            android:text="33 %"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/info_temp"
+            android:layout_marginTop="16dp"
+            android:layout_alignEnd="@id/info_temp"
+            android:id="@+id/info_humidity"
+            android:textColor="@color/good" />
 
 
     </RelativeLayout>

@@ -163,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(MainActivity.this, HiveInfo.class);
                 i.putExtra("hiveName", newHive.getName());
                 i.putExtra("hiveLocation", newHive.getLocation());
+                i.putExtra("hiveHumidity", Integer.toString(newHive.getData().getHumidity()));
                 i.putExtra("hiveDataWeight", Integer.toString(newHive.getData().getWeight()));
                 i.putExtra("hiveDataTemp", Integer.toString(newHive.getData().getTemperature()));
 

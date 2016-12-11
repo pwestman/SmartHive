@@ -30,7 +30,7 @@
             android:text="@string/hive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+            android:layout_marginStart="80dp"
             android:layout_marginTop="90dp"
             android:id="@+id/info_hive_name"
             android:textSize="26sp"
@@ -59,12 +59,31 @@
             android:id="@+id/info_temp" />
 
         <TextView
+            android:text="Humidity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/info_temp_label"
+            android:layout_alignEnd="@id/info_temp_label"
+            android:layout_marginTop="25dp"
+            android:id="@+id/info_humidity_label" />
+
+        <TextView
+            android:text="33%"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/info_humidity"
+            android:layout_below="@id/info_temp"
+            android:layout_alignEnd="@id/info_temp"
+            android:layout_marginTop="25dp"
+            android:textColor="@color/good" />
+
+        <TextView
             android:text="@string/last_inspection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/info_temp_label"
             android:layout_marginStart="75dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="65dp"
             android:id="@+id/info_date_label" />
 
         <TextView
@@ -75,7 +94,7 @@
             android:textColor="@color/good"
             android:layout_below="@id/info_temp_label"
             android:layout_marginEnd="75dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="65dp"
             android:id="@+id/info_date" />
 
         <TextView
