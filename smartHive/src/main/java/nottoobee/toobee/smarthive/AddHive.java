@@ -104,10 +104,10 @@ public class AddHive extends AppCompatActivity implements LocationListener{
 
 
             tv = (TextView) findViewById(R.id.textView19);
-            tv.setText(Double.toString(lat) + ", " + Double.toString(longi));
+            tv.setText(Double.toString(lat).substring(0, 6) + ", " + Double.toString(longi).substring(0, 6));
             // Create Hive
             String hiveName = ((EditText) findViewById(R.id.add_hive_name)).getText().toString();
-            Hive hive = new Hive(hiveName, Double.toString(lat) + ", " + Double.toString(longi));
+            Hive hive = new Hive(hiveName, Double.toString(lat).substring(0, 6) + ", " + Double.toString(longi).substring(0, 6));
 
 
             // Upload to database
