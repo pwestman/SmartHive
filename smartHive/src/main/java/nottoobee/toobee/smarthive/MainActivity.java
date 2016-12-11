@@ -26,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -127,16 +128,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addDrawerItems() {
-        String[] burgerArray = { "Hive Map", "Graphs", "Settings" };
+        final String[] burgerArray = { "How To", "Hive Map", "About Us" };
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, burgerArray);
         mDrawerList.setAdapter(mAdapter);
 
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(MainActivity.this, Settings.class);
-                startActivity(i);
-                //Toast.makeText(MainActivity.this, "Time for an upgrade!", Toast.LENGTH_SHORT).show();
+                switch(position) {
+                    case 0:
+                        Toast.makeText(MainActivity.this, "You clicked item 2", Toast.LENGTH_LONG).show();
+                        break;
+                    case 1:
+                        Toast.makeText(MainActivity.this, "You clicked item 1", Toast.LENGTH_LONG).show();
+                        break;
+                    default:
+                        Intent k = new Intent(MainActivity.this, Settings.class);
+                        startActivity(k);
+                }
             }
         });
     }
