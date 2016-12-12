@@ -42,6 +42,10 @@ public class Data implements Parcelable{
         return temperature;
     }
 
+    public int getHumidity() {
+        return humidity;
+    }
+
     public int getPopulation() {
         return population;
     }
