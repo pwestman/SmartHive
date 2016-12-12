@@ -44,7 +44,7 @@ public class AddHive extends AppCompatActivity implements LocationListener{
     private double lat;
     private double longi;
     TextView tv;
-    private static final int MY_PERMISSION_REQUEST_FINE_LOCATION = 1;
+    private final int MY_PERMISSION_REQUEST_FINE_LOCATION = 1;
     private boolean permissionIsGranted = false;
     private Location loc;
     private ArrayList<String> hiveNames;

@@ -189,6 +189,10 @@ public class MainActivity extends AppCompatActivity {
         ref.child(name).removeValue();
     }
 
+    public static void updateLocation(String name, String newLocation){
+        ref.child(name).child("location").setValue(newLocation);
+    }
+
     public static ArrayList getHiveNameList(){
         return hiveName;
     }

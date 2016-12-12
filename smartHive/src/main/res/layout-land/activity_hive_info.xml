@@ -143,6 +143,36 @@
             android:id="@+id/info_humidity"
             android:textColor="@color/good" />
 
+        <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/info_population_label"
+            android:layout_alignEnd="@id/info_population_label"
+            android:layout_marginTop="20dp"
+            android:id="@+id/info_location_label" />
+
+        <TextView
+            android:text="54.421, 70.084"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/info_population"
+            android:layout_alignEnd="@id/info_population"
+            android:layout_marginTop="20dp"
+            android:id="@+id/info_location"
+            android:textColor="@color/good" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_refresh_yellow"
+            android:layout_below="@id/info_population"
+            android:layout_alignParentEnd="true"
+            android:onClick="setLocation"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="165dp"
+            android:id="@+id/refreshLocation" />
+
 
     </RelativeLayout>
 

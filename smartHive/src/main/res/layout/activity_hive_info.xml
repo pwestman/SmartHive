@@ -41,8 +41,8 @@
             android:layout_width="wrap_content"
             android:layout_below="@id/info_hive_name"
             android:layout_height="wrap_content"
-            android:layout_marginStart="75dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="30dp"
             android:id="@+id/info_temp_label"
             android:textAlignment="center"
             android:layout_alignEnd="@+id/info_date_label" />
@@ -54,8 +54,8 @@
             android:layout_below="@id/info_hive_name"
             android:textColor="@color/bad"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="75dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginTop="30dp"
             android:id="@+id/info_temp" />
 
         <TextView
@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/info_temp_label"
             android:layout_alignEnd="@id/info_temp_label"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:id="@+id/info_humidity_label" />
 
         <TextView
@@ -74,7 +74,7 @@
             android:id="@+id/info_humidity"
             android:layout_below="@id/info_temp"
             android:layout_alignEnd="@id/info_temp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:textColor="@color/good" />
 
         <TextView
@@ -82,8 +82,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/info_temp_label"
-            android:layout_marginStart="75dp"
-            android:layout_marginTop="65dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="55dp"
             android:id="@+id/info_date_label" />
 
         <TextView
@@ -93,8 +93,8 @@
             android:layout_alignParentEnd="true"
             android:textColor="@color/good"
             android:layout_below="@id/info_temp_label"
-            android:layout_marginEnd="75dp"
-            android:layout_marginTop="65dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginTop="55dp"
             android:id="@+id/info_date" />
 
         <TextView
@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/info_date_label"
             android:layout_marginStart="75dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:id="@+id/info_weight_label"
             android:layout_alignEnd="@+id/info_date_label" />
 
@@ -114,8 +114,8 @@
             android:layout_below="@id/info_date_label"
             android:textColor="@color/good"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="75dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="50dp"
             android:id="@+id/info_weight" />
 
         <TextView
@@ -123,7 +123,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/info_weight_label"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:id="@+id/info_population_label"
             android:layout_alignEnd="@+id/info_weight_label" />
 
@@ -134,8 +134,8 @@
             android:layout_below="@id/info_weight_label"
             android:textColor="@color/bad"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="75dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="50dp"
             android:id="@+id/info_population" />
 
         <ImageView
@@ -147,6 +147,37 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
             android:layout_marginTop="16dp" />
+
+        <TextView
+            android:text="Location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/info_population_label"
+            android:layout_alignEnd="@id/info_population_label"
+            android:layout_marginTop="20dp"
+            android:id="@+id/info_location_label" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/info_population"
+            android:layout_alignEnd="@id/info_population"
+            android:layout_marginTop="20dp"
+            android:id="@+id/info_location"
+            android:textColor="@color/good"
+            android:text="54.421, 70.084" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_refresh_yellow"
+            android:layout_below="@id/info_population"
+            android:layout_alignParentEnd="true"
+            android:onClick="setLocation"
+            android:layout_marginTop="17dp"
+            android:layout_marginEnd="15dp"
+            android:id="@+id/refreshLocation" />
 
 
     </RelativeLayout>
