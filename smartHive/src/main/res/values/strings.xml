@@ -22,5 +22,6 @@
     <string name="title_activity_add_hive">Add Hive</string>
     <string name="addHint">Name</string>
     <string name="delete_hive">Delete Hive</string>
+    <string name="title_activity_hive_location">Hive Location</string>
     >>>>>>> f4e889f475f81adf450e31e88887dae3cd5504d0
 </resources>

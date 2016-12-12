@@ -63,31 +63,31 @@ public class HiveInfo extends AppCompatActivity implements LocationListener {
         hiveKey = i.getStringExtra("hiveKey");
     }
 
-public void deleteHive(MenuItem item) {
-    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-    alertDialogBuilder.setTitle("Delete Hive?");
+    public void deleteHive(MenuItem item) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Delete Hive?");
 
-    alertDialogBuilder
-            .setMessage("Click yes to delete this hive")
-            .setCancelable(false)
-            .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog,int id) {
-                    // TODO
-                    MainActivity.deleteHive(hiveKey);
-                    startActivity(new Intent(HiveInfo.this, MainActivity.class));
-                }
-            })
-            .setNegativeButton("No",new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog,int id) {
+        alertDialogBuilder
+                .setMessage("Click yes to delete this hive")
+                .setCancelable(false)
+                .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        // TODO
+                        MainActivity.deleteHive(hiveKey);
+                        startActivity(new Intent(HiveInfo.this, MainActivity.class));
+                    }
+                })
+                .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
 
-                    dialog.cancel();
-                }
-            });
+                        dialog.cancel();
+                    }
+                });
 
-    AlertDialog alertDialog = alertDialogBuilder.create();
+        AlertDialog alertDialog = alertDialogBuilder.create();
 
-    alertDialog.show();
-}
+        alertDialog.show();
+    }
 
     public void setLocation(View view){
         checkPerm();
@@ -165,5 +165,14 @@ public void deleteHive(MenuItem item) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.hive_info_menu, menu);
         return true;
+    }
+
+    public void goToMap(View view) {
+        Intent j = getIntent();
+
+        Intent i = new Intent(HiveInfo.this, HiveLocation.class);
+        i.putExtra("location", j.getStringExtra("hiveLocation"));
+        i.putExtra("hiveName", j.getStringExtra("hiveName"));
+        startActivity(i);
     }
 }
