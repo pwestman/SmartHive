@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -44,7 +45,7 @@ import java.util.TimeZone;
 public class MainActivity extends AppCompatActivity {
 
     private ListView mDrawerList;
-    private LinearLayout grid;
+    private GridLayout grid;
     private int numHives = 0;
     private static DatabaseReference ref;
     private static ArrayList<String> hiveName;
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mDrawerList = (ListView) findViewById(R.id.navList);
-        grid = (LinearLayout) findViewById(R.id.hive_display);
+        grid = (GridLayout) findViewById(R.id.hive_display);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -159,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
      * @param hive   hive object
      * @param layout the GridLayout layout on the main screen, where the hive objects will be inflated
      */
-    private void drawHive(Hive hive, LinearLayout layout) {
+    private void drawHive(Hive hive, GridLayout layout) {
         // TODO: Pretty this up to make it look like the mockup.
         final Hive newHive = hive;
         LinearLayout ln = new LinearLayout(this);
