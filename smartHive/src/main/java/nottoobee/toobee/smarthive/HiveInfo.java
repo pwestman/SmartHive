@@ -281,7 +281,7 @@ public class HiveInfo extends AppCompatActivity implements LocationListener {
 
             tv.setText(String.format(Locale.US, "%1$.3f", latitude) + ", " + String.format(Locale.US, "%1$.3f", longitude));
 
-            MainActivity.updateLocation(hiveKey, Double.toString(latitude).substring(0, 7) + ", " + Double.toString(longitude).substring(0, 7));
+            MainActivity.updateLocation(hiveKey, Double.toString(latitude) + ", " + Double.toString(longitude));
         } else {
             Toast.makeText(getBaseContext(), "Location permissions required", Toast.LENGTH_SHORT).show();
         }
