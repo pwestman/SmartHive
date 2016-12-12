@@ -5,13 +5,13 @@
 package nottoobee.toobee.smarthive;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,7 +19,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class HiveInfo extends AppCompatActivity {
 
@@ -67,7 +66,7 @@ public class HiveInfo extends AppCompatActivity {
     }
 
     private void addDrawerItems() {
-        final String[] burgerArray = { "Hives Home", "How To", "Hive Map", "About Us" };
+        final String[] burgerArray = { "Hives Home", "How To", "About Us" };
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, burgerArray);
         mDrawerList.setAdapter(mAdapter);
 
@@ -82,9 +81,6 @@ public class HiveInfo extends AppCompatActivity {
                     case 1:
                         Intent j = new Intent(HiveInfo.this, HowTo.class);
                         startActivity(j);
-                        break;
-                    case 2:
-                        Toast.makeText(HiveInfo.this, "You clicked Hive Map", Toast.LENGTH_LONG).show();
                         break;
                     default:
                         Intent k = new Intent(HiveInfo.this, AboutUs.class);

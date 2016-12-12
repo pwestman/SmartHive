@@ -18,7 +18,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class HowTo extends AppCompatActivity {
 
@@ -60,7 +59,7 @@ public class HowTo extends AppCompatActivity {
     }
 
     private void addDrawerItems() {
-        final String[] burgerArray = { "Hives Home", "How To", "Hive Map", "About Us" };
+        final String[] burgerArray = { "Hives Home", "How To", "About Us" };
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, burgerArray);
         mDrawerList.setAdapter(mAdapter);
 
@@ -75,9 +74,6 @@ public class HowTo extends AppCompatActivity {
                     case 1:
                         Intent j = new Intent(HowTo.this, HowTo.class);
                         startActivity(j);
-                        break;
-                    case 2:
-                        Toast.makeText(HowTo.this, "You clicked Hive Map", Toast.LENGTH_LONG).show();
                         break;
                     default:
                         Intent k = new Intent(HowTo.this, AboutUs.class);
