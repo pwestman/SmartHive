@@ -21,48 +21,50 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-
-        <ImageView
-            android:id="@+id/bg_top"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/bg_overlay_top" />
-
         <ScrollView
             android:id="@+id/main_scroll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="30dp"
             android:layout_marginStart="30dp"
-            android:background="@drawable/bg_overlay_middle"
+            android:scrollbarSize="1dp"
             android:fillViewport="true">
 
-            <GridLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginBottom="60dp"
-                android:layout_marginTop="60dp"
-                android:columnCount="2"
-                android:id="@+id/hive_display">
+                android:layout_marginTop="30dp"
+                android:orientation="vertical">
 
-            </GridLayout>
 
+                <ImageView
+                    android:id="@+id/bg_top"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/bg_overlay_top" />
+
+
+                <LinearLayout
+                    android:id="@+id/hive_display"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_overlay_middle"
+                    android:layout_gravity="center"
+                    android:orientation="vertical" />
+
+                <ImageView
+                    android:id="@+id/bg_bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/bg_overlay_bottom" />
+                
+                <android.support.v4.widget.Space
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp" />
+            </LinearLayout>
         </ScrollView>
-
-        <ImageView
-            android:id="@+id/bg_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginStart="30dp"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/bg_overlay_bottom" />
     </LinearLayout>
 
 
@@ -72,6 +74,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="#ffeeeeee" />
+    
 
 </android.support.v4.widget.DrawerLayout>
 

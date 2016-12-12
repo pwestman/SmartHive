@@ -15,10 +15,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridLayout;
@@ -45,7 +47,7 @@ import java.util.TimeZone;
 public class MainActivity extends AppCompatActivity {
 
     private ListView mDrawerList;
-    private GridLayout grid;
+    private LinearLayout grid;
     private int numHives = 0;
     private static DatabaseReference ref;
     private static ArrayList<String> hiveName;
@@ -60,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mDrawerList = (ListView) findViewById(R.id.navList);
-        grid = (GridLayout) findViewById(R.id.hive_display);
+        grid = (LinearLayout) findViewById(R.id.hive_display);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -84,9 +86,6 @@ public class MainActivity extends AppCompatActivity {
 
         addDrawerItems();
 
-        // TODO: Remove these once the placement of hive graphics once the GridLayout is working.
-        //drawHive(new Hive("Hive 1", "gps coordinates"), (GridLayout)findViewById(R.id.hive_display));
-        //drawHive(new Hive("Hive 2", "gps coordinates"), (GridLayout)findViewById(R.id.hive_display));
 
         // Firebase Auth
         FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
@@ -160,15 +159,18 @@ public class MainActivity extends AppCompatActivity {
      * @param hive   hive object
      * @param layout the GridLayout layout on the main screen, where the hive objects will be inflated
      */
-    private void drawHive(Hive hive, GridLayout layout) {
+    private void drawHive(Hive hive, LinearLayout layout) {
         // TODO: Pretty this up to make it look like the mockup.
         final Hive newHive = hive;
         LinearLayout ln = new LinearLayout(this);
-        layout.addView(ln);
+        ln.setOrientation(LinearLayout.VERTICAL);
+
+
         TextView tv = new TextView(this);
+        tv.setGravity(View.TEXT_ALIGNMENT_CENTER);
         tv.setHint("hive_name_" + numHives++);
         tv.setText(hive.getName());
-        ln.addView(tv);
+
         ImageView iv = new ImageView(this);
         iv.setImageResource(R.drawable.hive_green);
         iv.setOnClickListener(new View.OnClickListener() {
@@ -191,6 +193,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        ln.addView(tv);
+        layout.addView(ln);
         ln.addView(iv);
     }
 
