@@ -57,9 +57,9 @@ public class HiveInfo extends AppCompatActivity implements LocationListener {
     // flag for GPS status
     boolean canGetLocation = false;
 
-    Location location; // location
-    double latitude; // latitude
-    double longitude; // longitude
+    Location location;
+    double latitude;
+    double longitude;
 
     // The minimum distance to change Updates in meters
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
@@ -89,28 +89,30 @@ public class HiveInfo extends AppCompatActivity implements LocationListener {
         addDrawerItems();
 
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
 
-        try {
+
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
             ab.setDisplayShowHomeEnabled(true);
             ab.setLogo(R.drawable.logo);
-        }catch (Exception e){
-            e.printStackTrace();
+            ab.setDisplayUseLogoEnabled(true);
         }
 
+
         Intent i = getIntent();
-        ab.setDisplayUseLogoEnabled(true);
-        ((TextView)findViewById(R.id.info_hive_name)).setText(i.getStringExtra("hiveName"));
-        ((TextView)findViewById(R.id.info_population)).setText(i.getStringExtra("hiveDataPop"));
-        ((TextView)findViewById(R.id.info_temp)).setText(i.getStringExtra("hiveDataTemp"));
-        ((TextView)findViewById(R.id.info_date)).setText(i.getStringExtra("hiveDataDate"));
-        ((TextView)findViewById(R.id.info_weight)).setText(i.getStringExtra("hiveDataWeight"));
-        ((TextView)findViewById(R.id.info_humidity)).setText(i.getStringExtra("hiveHumidity") + " %");
+
+        ((TextView) findViewById(R.id.info_hive_name)).setText(i.getStringExtra("hiveName"));
+        ((TextView) findViewById(R.id.info_population)).setText(i.getStringExtra("hiveDataPop"));
+        ((TextView) findViewById(R.id.info_temp)).setText(i.getStringExtra("hiveDataTemp"));
+        ((TextView) findViewById(R.id.info_date)).setText(i.getStringExtra("hiveDataDate"));
+        ((TextView) findViewById(R.id.info_weight)).setText(i.getStringExtra("hiveDataWeight"));
+        ((TextView) findViewById(R.id.info_humidity)).setText(i.getStringExtra("hiveHumidity") + " %");
 
         hiveKey = i.getStringExtra("hiveKey");
         tv = (TextView) findViewById(R.id.info_location);
         tv.setText(i.getStringExtra("hiveLocation"));
     }
+
 
 public void deleteHive(MenuItem item) {
     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -128,7 +130,6 @@ public void deleteHive(MenuItem item) {
             })
             .setNegativeButton(getResources().getString(R.string.no),new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog,int id) {
-
                     dialog.cancel();
                 }
             });
@@ -138,12 +139,12 @@ public void deleteHive(MenuItem item) {
     alertDialog.show();
 }
 
-    public void checkPerm(){
+    public void checkPerm() {
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(new String[] {android.Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSION_REQUEST_FINE_LOCATION);
+                requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSION_REQUEST_FINE_LOCATION);
             }
         }
     }
@@ -246,26 +247,21 @@ public void deleteHive(MenuItem item) {
                 isNetworkEnabled = locationManager
                         .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
-                if (!isGPSEnabled && !isNetworkEnabled) {
-                    // no network provider is enabled
-                } else {
+                if (isGPSEnabled && isNetworkEnabled) {
                     this.canGetLocation = true;
                     // First get location from Network Provider
-                    if (isNetworkEnabled) {
-                        locationManager.requestLocationUpdates(
-                                LocationManager.NETWORK_PROVIDER,
-                                MIN_TIME_BW_UPDATES,
-                                MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-                        Log.d("Network", "Network");
-                        if (locationManager != null) {
-                            location = locationManager
-                                    .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-                            if (location != null) {
-                                latitude = location.getLatitude();
-                                longitude = location.getLongitude();
-                            }
-                        }
+
+                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+                            MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+
+                    if (locationManager != null) {
+                        location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+                        latitude = location.getLatitude();
+                        longitude = location.getLongitude();
+
                     }
+
                     // if GPS Enabled get lat/long using GPS Services
                     if (isGPSEnabled) {
                         if (location == null) {
@@ -294,32 +290,30 @@ public void deleteHive(MenuItem item) {
             tv.setText(Double.toString(latitude).substring(0, 7) + ", " + Double.toString(longitude).substring(0, 7));
 
             MainActivity.updateLocation(hiveKey, Double.toString(latitude).substring(0, 7) + ", " + Double.toString(longitude).substring(0, 7));
-        }else{
+        } else {
             Toast.makeText(getBaseContext(), "Location permissions required", Toast.LENGTH_SHORT).show();
         }
     }
 
     /**
      * Function to get latitude
-     * */
-    public double getLatitude(){
-        if(location != null){
+     */
+    public double getLatitude() {
+        if (location != null) {
             latitude = location.getLatitude();
         }
 
-        // return latitude
         return latitude;
     }
 
     /**
      * Function to get longitude
-     * */
-    public double getLongitude(){
-        if(location != null){
+     */
+    public double getLongitude() {
+        if (location != null) {
             longitude = location.getLongitude();
         }
 
-        // return longitude
         return longitude;
     }
 }

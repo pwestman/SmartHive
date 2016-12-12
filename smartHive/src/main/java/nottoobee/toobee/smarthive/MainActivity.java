@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser mFirebaseUser;
     private String mUsername;
     private String mPhotoUrl;
-    private GridLayout grid;
+    private LinearLayout grid;
     private int numHives = 0;
     private static DatabaseReference ref;
     private static ArrayList <String> hiveName;
@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mDrawerList = (ListView)findViewById(R.id.navList);
+<<<<<<< HEAD
         grid = (GridLayout)findViewById(R.id.hive_display);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -70,6 +71,9 @@ public class MainActivity extends AppCompatActivity {
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_closed);
 
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
+=======
+        grid = (LinearLayout)findViewById(R.id.hive_display);
+>>>>>>> hiveInfo
 
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
@@ -169,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
      * @param hive hive object
      * @param layout the GridLayout layout on the main screen, where the hive objects will be inflated
      */
-    private void drawHive(Hive hive, GridLayout layout) {
+    private void drawHive(Hive hive, LinearLayout layout) {
         // TODO: Pretty this up to make it look like the mockup.
         final Hive newHive = hive;
         LinearLayout ln = new LinearLayout(this);
