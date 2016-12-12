@@ -137,13 +137,14 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch(position) {
                     case 0:
-                        Toast.makeText(MainActivity.this, "You clicked item 2", Toast.LENGTH_LONG).show();
+                        Intent i = new Intent(MainActivity.this, HowTo.class);
+                        startActivity(i);
                         break;
                     case 1:
-                        Toast.makeText(MainActivity.this, "You clicked item 1", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "You clicked Hive Map", Toast.LENGTH_LONG).show();
                         break;
                     default:
-                        Intent k = new Intent(MainActivity.this, Settings.class);
+                        Intent k = new Intent(MainActivity.this, AboutUs.class);
                         startActivity(k);
                 }
             }
