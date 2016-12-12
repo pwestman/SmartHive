@@ -58,7 +58,7 @@
             android:id="@+id/info_temp" />
 
         <TextView
-            android:text="Humidity"
+            android:text="@string/humidity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/info_temp_label"
@@ -85,7 +85,6 @@
             android:id="@+id/info_date_label" />
 
         <TextView
-            android:text="4 days ago"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -145,7 +144,7 @@
             android:layout_marginTop="16dp" />
 
         <TextView
-            android:text="Location"
+            android:text="@string/location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/info_population_label"
@@ -181,22 +180,21 @@
             app:srcCompat="@drawable/map_icon"
             android:layout_below="@id/info_location_label"
             android:id="@+id/imageView2"
-            android:layout_marginStart="140dp"
-            android:layout_weight="1" />
+            android:layout_marginStart="140dp" />
 
         <TextView
             android:layout_marginTop="10dp"
             android:paddingTop="3dp"
-            android:text="View on Map"
+            android:text="@string/view_on_map"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView"
             android:layout_below="@id/info_location_label"
             android:paddingStart="25dp"
+            android:paddingEnd="25dp"
             android:layout_marginStart="140dp"
             android:paddingBottom="3dp"
-            android:onClick="goToMap"
-            android:layout_weight="1"/>
+            android:onClick="goToMap" />
 
     </RelativeLayout>
 

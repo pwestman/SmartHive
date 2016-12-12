@@ -23,5 +23,8 @@
     <string name="addHint">Name</string>
     <string name="delete_hive">Delete Hive</string>
     <string name="title_activity_hive_location">Hive Location</string>
+    <string name="humidity">Humidity</string>
+    <string name="location">Location</string>
+    <string name="view_on_map">View on Map</string>
     >>>>>>> f4e889f475f81adf450e31e88887dae3cd5504d0
 </resources>

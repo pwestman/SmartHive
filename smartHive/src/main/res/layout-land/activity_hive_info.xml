@@ -35,7 +35,7 @@
             android:textStyle="normal|bold" />
 
         <TextView
-            android:text="Humidity"
+            android:text="@string/humidity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/info_temp_label"
@@ -53,7 +53,6 @@
             android:id="@+id/info_date_label" />
 
         <TextView
-            android:text="4 days ago"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -74,7 +73,6 @@
             android:layout_alignEnd="@+id/info_date_label" />
 
         <TextView
-            android:text="91 kg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/info_date_label"
@@ -94,7 +92,6 @@
             android:layout_alignEnd="@+id/info_weight_label" />
 
         <TextView
-            android:text="56"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/info_weight_label"
@@ -125,7 +122,6 @@
             android:layout_marginTop="13dp" />
 
         <TextView
-            android:text="18° C"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/bad"
@@ -134,7 +130,6 @@
             android:layout_alignEnd="@+id/info_date" />
 
         <TextView
-            android:text="33 %"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/info_temp"
@@ -144,7 +139,7 @@
             android:textColor="@color/good" />
 
         <TextView
-            android:text="TextView"
+            android:text="@string/location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/info_population_label"
@@ -153,7 +148,6 @@
             android:id="@+id/info_location_label" />
 
         <TextView
-            android:text="54.421, 70.084"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/info_population"
