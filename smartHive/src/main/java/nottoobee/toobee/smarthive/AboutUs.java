@@ -17,13 +17,13 @@ public class AboutUs extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
-        /*try {
+        try {
             ab.setDisplayShowHomeEnabled(true);
             ab.setLogo(R.drawable.logo);
         }catch (Exception e){
             e.printStackTrace();
         }
 
-        ab.setDisplayUseLogoEnabled(true);*/
+        ab.setDisplayUseLogoEnabled(true);
     }
 }
