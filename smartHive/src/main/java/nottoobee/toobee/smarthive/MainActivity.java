@@ -26,7 +26,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -128,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addDrawerItems() {
-        final String[] burgerArray = { "How To", "Hive Map", "About Us" };
+        final String[] burgerArray = { "How To", "About Us" };
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, burgerArray);
         mDrawerList.setAdapter(mAdapter);
 
@@ -139,9 +138,6 @@ public class MainActivity extends AppCompatActivity {
                     case 0:
                         Intent i = new Intent(MainActivity.this, HowTo.class);
                         startActivity(i);
-                        break;
-                    case 1:
-                        Toast.makeText(MainActivity.this, "You clicked Hive Map", Toast.LENGTH_LONG).show();
                         break;
                     default:
                         Intent k = new Intent(MainActivity.this, AboutUs.class);
