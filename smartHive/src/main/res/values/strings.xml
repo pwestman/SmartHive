@@ -18,5 +18,37 @@
     <string name="log_in">Log In</string>
     <string name="nameIn">Name:</string>
     <string name="passwordIn">Password:</string>
-    <string name="title_activity_add_hive">add_hive</string>
+    <string name="title_activity_hive_map">HiveMap</string>
+    <string name="title_activity_add_hive">Add Hive</string>
+    <string name="addHint">Name</string>
+    <string name="delete_hive">Delete Hive</string>
+
+    <string name="title_activity_hive_location">Hive Location</string>
+
+    <string name="drawer_open">Drawer open</string>
+    <string name="drawer_closed">Drawer closed</string>
+    <string name="title">How To Use Smart Hive</string>
+    <string name="about_us">About Us</string>
+    <string name="thanks">Thank you for downloading our application!</string>
+    <string name="about_us_desc">Smart Hive was built by Roberto Loja, Yurii Sentsiv, and Paul Westman. We are 3rd Computer Engineering Technology students at Humber College Institute of Technology and Advanced Learning. This is our final year project in which we are attempting to help beekeepers have access to more information about what is going on inside the hive. This application was built for our Software Project class, in conjunction with our Hardware Production Technology course where we assembled the hardware that is placed in the hive.</string>
+    <string name="body">Attach the Smart Hive hardware including the Raspberry Pi to your bee hive. Power on, sign in to your Google account and run the startup script. The Hive will now appear on the home screen of this application. The Raspberry Pi will start to upload data about the hive to the database, which will show up when you click on the hive. To delete a hive, simply click on the trash can in the toolbar in the top right corner. See the locations of all your hives by clicking on the hamburger icon in the top left and selecting Hive Map.</string>
+    <string name="click_yes">Click yes to exit</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="exit">Exit Application?</string>
+    <string name="delete_hive_">Delete hive?</string>
+    <string name="click_yes_delete">Click yes to delete this hive</string>
+    <string name="location_updated">Location updated</string>
+    <string name="location_cant">Location can\'t be retrieved</string>
+    <string name="no_provider">No Provider Found</string>
+    <string name="permission_required">Location permissions required</string>
+    <string name="new_provider">"Enabled new provider "</string>
+    <string name="disabled_provider">"Disabled provider "</string>
+    <string name="hives_home">Hives Home</string>
+    <string name="how_to">How To</string>
+    <string name="about_us_drawer">About Us</string>
+    <string name="locations_permissions_granted">Location permissions required to be granted!</string>
+    <string name="permissions_granted">Permissions granted!</string>
+    <string name="enabled_provider">"Enabled new provider "</string>
+
 </resources>

@@ -18,19 +18,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
         android:ems="10"
-        android:id="@+id/add_hive_name" />
+        android:id="@+id/add_hive_name"
+        android:hint="@string/addHint" />
 
     <Button
-        android:text="Button"
+        android:text="@string/add_hive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="addHive"
         android:id="@+id/add_hive_button" />
 
     <TextView
-        android:text="TextView"
+        android:text=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView19" />
