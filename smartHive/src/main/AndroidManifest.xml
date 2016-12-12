@@ -23,10 +23,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HiveInfo"
-            android:parentActivityName=".MainActivity" />
+        android:name=".HiveInfo"
+        android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".Settings"
+            android:name=".HowTo"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity" />
         <activity
@@ -38,6 +38,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="nottoobee.toobee.smarthive.MainActivity" />
         </activity>
+<<<<<<< HEAD
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -56,6 +57,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="nottoobee.toobee.smarthive.HiveInfo" />
+=======
+        <activity android:name=".AboutUs"
+            android:parentActivityName=".MainActivity">
+>>>>>>> 69add4c93caef111836de742f25c517d08614a6a
         </activity>
     </application>
 
