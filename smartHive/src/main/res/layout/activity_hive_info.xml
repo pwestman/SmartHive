@@ -29,7 +29,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginTop="60dp"
         android:id="@+id/relativeLayout">
 
@@ -182,28 +182,28 @@
             android:id="@+id/refreshLocation" />
 
         <ImageView
-            android:layout_marginTop="12dp"
             android:layout_width="20dp"
             android:layout_height="20dp"
             app:srcCompat="@drawable/map_icon"
-            android:layout_below="@id/info_location_label"
             android:id="@+id/imageView2"
-            android:layout_marginStart="140dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:layout_alignBottom="@+id/textView"
+            android:layout_alignStart="@+id/textView" />
 
         <TextView
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             android:paddingTop="3dp"
             android:text="View on Map"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView"
-            android:layout_below="@id/info_location_label"
             android:paddingStart="25dp"
-            android:layout_marginStart="140dp"
             android:paddingBottom="3dp"
             android:onClick="goToMap"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:layout_below="@+id/refreshLocation"
+            android:layout_alignStart="@+id/info_location_label" />
 
     </RelativeLayout>
 

@@ -22,10 +22,9 @@
     <string name="title_activity_add_hive">Add Hive</string>
     <string name="addHint">Name</string>
     <string name="delete_hive">Delete Hive</string>
-<<<<<<< HEAD
+
     <string name="title_activity_hive_location">Hive Location</string>
-    >>>>>>> f4e889f475f81adf450e31e88887dae3cd5504d0
-=======
+
     <string name="drawer_open">Drawer open</string>
     <string name="drawer_closed">Drawer closed</string>
     <string name="title">How To Use Smart Hive</string>
@@ -51,5 +50,5 @@
     <string name="locations_permissions_granted">Location permissions required to be granted!</string>
     <string name="permissions_granted">Permissions granted!</string>
     <string name="enabled_provider">"Enabled new provider "</string>
->>>>>>> 69add4c93caef111836de742f25c517d08614a6a
+
 </resources>
