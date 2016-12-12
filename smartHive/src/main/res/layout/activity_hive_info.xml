@@ -189,7 +189,8 @@
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="16dp"
                             android:textAlignment="textStart"
-                            app:srcCompat="@drawable/ic_refresh_yellow" />
+                            app:srcCompat="@drawable/ic_refresh_yellow"
+                            android:contentDescription="@string/refresh_location_icon" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -206,7 +207,8 @@
                     android:id="@+id/imageView2"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    app:srcCompat="@drawable/map_icon" />
+                    app:srcCompat="@drawable/map_icon"
+                    android:contentDescription="@string/map_icon" />
 
                 <TextView
                     android:id="@+id/view_map_text"
@@ -224,6 +226,6 @@
         android:id="@+id/navList"
         android:layout_width="200dp"
         android:layout_height="match_parent"
-        android:layout_gravity="left|start"
+        android:layout_gravity="start"
         android:background="#ffeeeeee" />
 </android.support.v4.widget.DrawerLayout>

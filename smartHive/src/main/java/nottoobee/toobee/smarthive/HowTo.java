@@ -22,7 +22,6 @@ import android.widget.ListView;
 public class HowTo extends AppCompatActivity {
 
     private ListView mDrawerList;
-    private ArrayAdapter<String> mAdapter;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
     Toolbar toolbar;
@@ -32,7 +31,7 @@ public class HowTo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_how_to_use);
 
-        mDrawerList = (ListView)findViewById(R.id.navList);
+        mDrawerList = (ListView) findViewById(R.id.navList);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -46,27 +45,23 @@ public class HowTo extends AppCompatActivity {
         addDrawerItems();
 
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
-
-        try {
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
             ab.setDisplayShowHomeEnabled(true);
             ab.setLogo(R.drawable.logo);
-        }catch (Exception e){
-            e.printStackTrace();
+            ab.setDisplayUseLogoEnabled(true);
         }
-
-        ab.setDisplayUseLogoEnabled(true);
     }
 
     private void addDrawerItems() {
-        final String[] burgerArray = { getString(R.string.hives_home), getString(R.string.how_to), getString(R.string.about_us_drawer) };
-        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, burgerArray);
+        final String[] burgerArray = {getString(R.string.hives_home), getString(R.string.how_to), getString(R.string.about_us_drawer)};
+        ArrayAdapter<String> mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, burgerArray);
         mDrawerList.setAdapter(mAdapter);
 
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch(position) {
+                switch (position) {
                     case 0:
                         Intent i = new Intent(HowTo.this, MainActivity.class);
                         startActivity(i);

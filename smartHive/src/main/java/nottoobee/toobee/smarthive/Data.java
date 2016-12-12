@@ -8,7 +8,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 
-public class Data implements Parcelable{
+class Data implements Parcelable{
     private long date;
     private int temperature;
     private int population;
@@ -18,7 +18,7 @@ public class Data implements Parcelable{
     public Data() {
     }
 
-    public Data(Parcel in) {
+    private Data(Parcel in) {
         date = in.readLong();
         temperature = in.readInt();
         population = in.readInt();
@@ -34,23 +34,23 @@ public class Data implements Parcelable{
         this.humidity = humidity;
     }
 
-    public long getDate() {
+    long getDate() {
         return date;
     }
 
-    public int getTemperature() {
+    int getTemperature() {
         return temperature;
     }
 
-    public int getHumidity() {
+    int getHumidity() {
         return humidity;
     }
 
-    public int getPopulation() {
+    int getPopulation() {
         return population;
     }
 
-    public int getWeight() {
+    int getWeight() {
         return weight;
     }
 

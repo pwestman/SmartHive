@@ -17,8 +17,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class HiveLocation extends FragmentActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,14 +39,12 @@ public class HiveLocation extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-
         Intent i = getIntent();
         String loc = i.getStringExtra("location");
         Double lat = Double.parseDouble(loc.split(",")[0]);
         Double lon = Double.parseDouble(loc.split(",")[1]);
         LatLng hive = new LatLng(lat, lon);
-        mMap.addMarker(new MarkerOptions().position(hive).title(i.getStringExtra("hiveName")));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(hive, 15));
+        googleMap.addMarker(new MarkerOptions().position(hive).title(i.getStringExtra("hiveName")));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(hive, 15));
     }
 }

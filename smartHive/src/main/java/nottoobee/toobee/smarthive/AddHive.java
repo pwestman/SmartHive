@@ -30,22 +30,13 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class AddHive extends AppCompatActivity implements LocationListener{
+public class AddHive extends AppCompatActivity implements LocationListener {
 
-    private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
-    static final Integer LOCATION = 0x1;
-    private String mUsername;
-    private String mPhotoUrl;
-    private String mUid;
-    private String provider;
-    private LocationManager locationManager;
     private double lat;
     private double longi;
     TextView tv;
     private final int MY_PERMISSION_REQUEST_FINE_LOCATION = 1;
-    private boolean permissionIsGranted = false;
-    private Location loc;
     private ArrayList<String> hiveNames;
 
     // TODO: Validate all fields.
@@ -57,32 +48,22 @@ public class AddHive extends AppCompatActivity implements LocationListener{
         setSupportActionBar(toolbar);
 
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
 
-        mFirebaseAuth = FirebaseAuth.getInstance();
+        FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
         hiveNames = new ArrayList<>();
-        if (mFirebaseUser == null) {
-            startActivity(new Intent(this, SignIn.class));
-            finish();
-            return;
-        } else {
-            mUsername = mFirebaseUser.getDisplayName();
-            if (mFirebaseUser.getPhotoUrl() != null) {
-                mPhotoUrl = mFirebaseUser.getPhotoUrl().toString();
-            }
-            mUid = mFirebaseUser.getUid();
-        }
-
     }
 
     public void addHive(View view) {
         checkPerm();
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             Criteria criteria = new Criteria();
-            provider = locationManager.getBestProvider(criteria, false);
+            String provider = locationManager.getBestProvider(criteria, false);
 
             if (provider != null && !provider.equals("")) {
 
@@ -113,7 +94,7 @@ public class AddHive extends AppCompatActivity implements LocationListener{
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/users/" + mFirebaseUser.getUid());
             hiveNames = MainActivity.getHiveNameList();
             //checking if there are any gaps in numbering, which could appear when user deletes hive with middle index
-            if(!hiveNames.isEmpty()) {
+            if (!hiveNames.isEmpty()) {
                 int index = 0;
                 boolean check = true;
                 for (int i = 1; i <= hiveNames.size(); i++) {
@@ -131,7 +112,7 @@ public class AddHive extends AppCompatActivity implements LocationListener{
                 }
                 hive.setKey(Integer.toString(index));
                 ref.child(Integer.toString(index)).setValue(hive);
-            }else{
+            } else {
                 hive.setKey("1");
                 ref.child("1").setValue(hive);
             }
@@ -139,12 +120,12 @@ public class AddHive extends AppCompatActivity implements LocationListener{
         }
     }
 
-    public void checkPerm(){
+    public void checkPerm() {
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(new String[] {android.Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSION_REQUEST_FINE_LOCATION);
+                requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSION_REQUEST_FINE_LOCATION);
             }
         }
     }
@@ -152,11 +133,11 @@ public class AddHive extends AppCompatActivity implements LocationListener{
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode){
+        switch (requestCode) {
             case MY_PERMISSION_REQUEST_FINE_LOCATION:
-                if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(getApplicationContext(), R.string.permissions_granted, Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     Toast.makeText(getApplicationContext(), R.string.locations_permissions_granted, Toast.LENGTH_SHORT).show();
                 }
                 break;

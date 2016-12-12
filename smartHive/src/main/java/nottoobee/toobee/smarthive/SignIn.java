@@ -30,7 +30,6 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
     private static final String TAG = "SignIn";
     private static final int RC_SIGN_IN = 9001;
     private FirebaseAuth mFirebaseAuth;
-    private SignInButton mSignInButton;
     private GoogleApiClient mGoogleApiClient;
 
     @Override
@@ -42,7 +41,7 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
 
         ActionBar ab = getSupportActionBar();
 
-        mSignInButton = (SignInButton) findViewById(R.id.sign_in_button);
+        SignInButton mSignInButton = (SignInButton) findViewById(R.id.sign_in_button);
         mSignInButton.setOnClickListener(this);
 
         GoogleSignInOptions gso = new GoogleSignInOptions
@@ -58,14 +57,12 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
 
         mFirebaseAuth = FirebaseAuth.getInstance();
 
-        try {
+
+        if (ab != null) {
             ab.setDisplayShowHomeEnabled(true);
             ab.setLogo(R.drawable.logo);
-        }catch (Exception e){
-            e.printStackTrace();
+            ab.setDisplayUseLogoEnabled(true);
         }
-
-        ab.setDisplayUseLogoEnabled(true);
     }
 
     public void login(View view) {
@@ -76,7 +73,7 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
     private void handleFirebaseAuthResult(AuthResult authResult) {
         if (authResult != null) {
             FirebaseUser user = authResult.getUser();
-            Toast.makeText(this, "Welome " + user.getEmail(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Welcome " + user.getEmail(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -86,8 +83,6 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
             case R.id.sign_in_button:
                 signIn();
                 break;
-            default:
-                return;
         }
     }
 

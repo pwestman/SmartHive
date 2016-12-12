@@ -4,11 +4,9 @@
 
 package nottoobee.toobee.smarthive;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -33,19 +31,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Locale;
+
 public class HiveInfo extends AppCompatActivity implements LocationListener {
 
-    private final int MY_PERMISSION_REQUEST_FINE_LOCATION = 1;
     private String hiveKey;
-    private String provider;
-    //private LocationManager locationManager;
-    private double lat;
-    private double longi;
     private ListView mDrawerList;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
     Toolbar toolbar;
-    private ArrayAdapter<String> mAdapter;
     private TextView tv;
 
     // flag for GPS status
@@ -65,7 +59,7 @@ public class HiveInfo extends AppCompatActivity implements LocationListener {
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
 
     // The minimum time between updates in milliseconds
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
+    private static final long MIN_TIME_BW_UPDATES = 1000 * 60; // 1 minute
 
     // Declaring a Location Manager
     protected LocationManager locationManager;
@@ -76,7 +70,7 @@ public class HiveInfo extends AppCompatActivity implements LocationListener {
         setContentView(R.layout.activity_hive_info);
 
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
-        mDrawerList = (ListView)findViewById(R.id.navList);
+        mDrawerList = (ListView) findViewById(R.id.navList);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -114,36 +108,37 @@ public class HiveInfo extends AppCompatActivity implements LocationListener {
     }
 
 
-public void deleteHive(MenuItem item) {
-    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-    alertDialogBuilder.setTitle(getResources().getString(R.string.delete_hive_));
+    public void deleteHive(MenuItem item) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle(getResources().getString(R.string.delete_hive_));
 
-    alertDialogBuilder
-            .setMessage(getResources().getString(R.string.click_yes_delete))
-            .setCancelable(false)
-            .setPositiveButton(getResources().getString(R.string.yes),new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog,int id) {
-                    // TODO
-                    MainActivity.deleteHive(hiveKey);
-                    startActivity(new Intent(HiveInfo.this, MainActivity.class));
-                }
-            })
-            .setNegativeButton(getResources().getString(R.string.no),new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog,int id) {
-                    dialog.cancel();
-                }
-            });
+        alertDialogBuilder
+                .setMessage(getResources().getString(R.string.click_yes_delete))
+                .setCancelable(false)
+                .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // TODO
+                        MainActivity.deleteHive(hiveKey);
+                        startActivity(new Intent(HiveInfo.this, MainActivity.class));
+                    }
+                })
+                .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
 
-    AlertDialog alertDialog = alertDialogBuilder.create();
+        AlertDialog alertDialog = alertDialogBuilder.create();
 
-    alertDialog.show();
-}
+        alertDialog.show();
+    }
 
     public void checkPerm() {
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                int MY_PERMISSION_REQUEST_FINE_LOCATION = 1;
                 requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSION_REQUEST_FINE_LOCATION);
             }
         }
@@ -151,8 +146,6 @@ public void deleteHive(MenuItem item) {
 
     @Override
     public void onLocationChanged(Location location) {
-        lat = location.getLatitude();
-        longi = location.getLongitude();
     }
 
     @Override
@@ -191,14 +184,14 @@ public void deleteHive(MenuItem item) {
     }
 
     private void addDrawerItems() {
-        final String[] burgerArray = { getString(R.string.hives_home), getString(R.string.how_to), getString(R.string.about_us_drawer) };
-        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, burgerArray);
+        final String[] burgerArray = {getString(R.string.hives_home), getString(R.string.how_to), getString(R.string.about_us_drawer)};
+        ArrayAdapter<String> mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, burgerArray);
         mDrawerList.setAdapter(mAdapter);
 
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch(position) {
+                switch (position) {
                     case 0:
                         Intent i = new Intent(HiveInfo.this, MainActivity.class);
                         startActivity(i);
@@ -286,35 +279,12 @@ public void deleteHive(MenuItem item) {
                 e.printStackTrace();
             }
 
-
-            tv.setText(Double.toString(latitude).substring(0, 7) + ", " + Double.toString(longitude).substring(0, 7));
+            tv.setText(String.format(Locale.US, "%1$.3f", latitude) + ", " + String.format(Locale.US, "%1$.3f", longitude));
 
             MainActivity.updateLocation(hiveKey, Double.toString(latitude).substring(0, 7) + ", " + Double.toString(longitude).substring(0, 7));
         } else {
             Toast.makeText(getBaseContext(), "Location permissions required", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    /**
-     * Function to get latitude
-     */
-    public double getLatitude() {
-        if (location != null) {
-            latitude = location.getLatitude();
-        }
-
-        return latitude;
-    }
-
-    /**
-     * Function to get longitude
-     */
-    public double getLongitude() {
-        if (location != null) {
-            longitude = location.getLongitude();
-        }
-
-        return longitude;
     }
 }
 

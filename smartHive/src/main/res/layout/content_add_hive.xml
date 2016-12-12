@@ -15,23 +15,23 @@
     tools:showIn="@layout/activity_add_hive">
 
     <EditText
+        android:id="@+id/add_hive_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/add_hive_name"
-        android:hint="@string/addHint" />
+        android:hint="@string/addHint"
+        android:inputType="textPersonName" />
 
     <Button
-        android:text="@string/add_hive"
+        android:id="@+id/add_hive_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="addHive"
-        android:id="@+id/add_hive_button" />
+        android:text="@string/add_hive" />
 
     <TextView
-        android:text=""
+        android:id="@+id/textView19"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView19" />
+        android:text="" />
 </LinearLayout>

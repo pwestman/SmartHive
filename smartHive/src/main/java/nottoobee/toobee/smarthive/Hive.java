@@ -6,6 +6,7 @@ package nottoobee.toobee.smarthive;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Date;
 
 /*
@@ -18,7 +19,7 @@ import java.util.Date;
     It is also possible to pull values from the database directly into a Hive object.
 */
 
-public class Hive implements Parcelable{
+class Hive implements Parcelable {
     private String name;
     private String location;
     private long date_created;
@@ -28,14 +29,14 @@ public class Hive implements Parcelable{
     public Hive() {
     }
 
-    public Hive(Parcel in) {
+    private Hive(Parcel in) {
         name = in.readString();
         location = in.readString();
         date_created = in.readLong();
         data = in.readParcelable(Data.class.getClassLoader());
     }
 
-    public Hive(String name, String location) {
+    Hive(String name, String location) {
         this.name = name;
         this.location = location;
         this.date_created = new Date().getTime();
@@ -58,11 +59,11 @@ public class Hive implements Parcelable{
     }
 
 
-    public void setKey(String key) {
+    void setKey(String key) {
         this.key = (key);
     }
 
-    public String getKey() {
+    String getKey() {
         return key;
     }
 
