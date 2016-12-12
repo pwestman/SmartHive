@@ -145,13 +145,10 @@ public class HiveInfo extends AppCompatActivity implements LocationListener {
     }
 
     @Override
-    public void onLocationChanged(Location location) {
-    }
+    public void onLocationChanged(Location location) { }
 
     @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
+    public void onStatusChanged(String provider, int status, Bundle extras) { }
 
     @Override
     public void onProviderEnabled(String provider) {
@@ -225,20 +222,18 @@ public class HiveInfo extends AppCompatActivity implements LocationListener {
     }
 
 
+    // TODO: Rewrite this hideous function.
     public void setLocation(View view) {
         checkPerm();
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             try {
-                locationManager = (LocationManager) this
-                        .getSystemService(LOCATION_SERVICE);
+                locationManager = (LocationManager) this.getSystemService(LOCATION_SERVICE);
 
                 // getting GPS status
-                isGPSEnabled = locationManager
-                        .isProviderEnabled(LocationManager.GPS_PROVIDER);
+                isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
                 // getting network status
-                isNetworkEnabled = locationManager
-                        .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+                isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
                 if (isGPSEnabled && isNetworkEnabled) {
                     this.canGetLocation = true;
