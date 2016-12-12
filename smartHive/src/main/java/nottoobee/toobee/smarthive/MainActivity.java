@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
 }
 
         hiveName = new ArrayList<>();
+        hiveLocations = new ArrayList<>();
         // Database connection - Get DB reference that corresponds to active user.
         ref = FirebaseDatabase.getInstance()
                 .getReference("/users/" + mFirebaseUser.getUid());
