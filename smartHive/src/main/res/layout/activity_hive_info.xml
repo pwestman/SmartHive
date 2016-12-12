@@ -8,193 +8,193 @@
     tools:context="nottoobee.toobee.smarthive.HiveInfo">
 
     <include
+        android:id="@+id/include"
         layout="@layout/tool_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/include"
-        />
+        android:layout_height="wrap_content" />
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/layer_5"
         android:layout_below="@+id/include"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
         android:layout_marginBottom="60dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="60dp"
-        android:id="@+id/relativeLayout">
+        android:background="@drawable/layer_5">
 
         <TextView
-            android:text="@string/hive"
+            android:id="@+id/info_hive_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:layout_marginTop="90dp"
-            android:id="@+id/info_hive_name"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
             android:textSize="26sp"
             android:textStyle="normal|bold" />
 
         <TextView
-            android:text="@string/temperature"
+            android:id="@+id/info_temp_label"
             android:layout_width="wrap_content"
-            android:layout_below="@id/info_hive_name"
             android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/info_date_label"
+            android:layout_below="@id/info_hive_name"
             android:layout_marginStart="60dp"
             android:layout_marginTop="30dp"
-            android:id="@+id/info_temp_label"
-            android:textAlignment="center"
-            android:layout_alignEnd="@+id/info_date_label" />
+            android:text="@string/temperature"
+            android:textAlignment="center" />
 
         <TextView
+            android:id="@+id/info_temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/info_hive_name"
-            android:textColor="@color/bad"
             android:layout_alignParentEnd="true"
+            android:layout_below="@id/info_hive_name"
             android:layout_marginEnd="50dp"
             android:layout_marginTop="30dp"
-            android:id="@+id/info_temp" />
+            android:textColor="@color/bad" />
 
         <TextView
-            android:text="@string/humidity"
+            android:id="@+id/info_humidity_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/info_temp_label"
             android:layout_alignEnd="@id/info_temp_label"
+            android:layout_below="@id/info_temp_label"
             android:layout_marginTop="20dp"
-            android:id="@+id/info_humidity_label" />
+            android:text="@string/humidity" />
 
         <TextView
+            android:id="@+id/info_humidity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/info_humidity"
-            android:layout_below="@id/info_temp"
             android:layout_alignEnd="@id/info_temp"
+            android:layout_below="@id/info_temp"
             android:layout_marginTop="20dp"
             android:textColor="@color/good" />
 
         <TextView
-            android:text="@string/last_inspection"
+            android:id="@+id/info_date_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/info_temp_label"
             android:layout_marginStart="50dp"
             android:layout_marginTop="55dp"
-            android:id="@+id/info_date_label" />
+            android:text="@string/last_inspection" />
 
         <TextView
+            android:id="@+id/info_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:textColor="@color/good"
             android:layout_below="@id/info_temp_label"
             android:layout_marginEnd="50dp"
             android:layout_marginTop="55dp"
-            android:id="@+id/info_date" />
+            android:textColor="@color/good" />
 
         <TextView
+            android:id="@+id/info_weight_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/info_date_label"
             android:layout_below="@id/info_date_label"
             android:layout_marginStart="75dp"
             android:layout_marginTop="20dp"
-            android:id="@+id/info_weight_label"
-            android:layout_alignEnd="@+id/info_date_label"
-            android:text="Weight:"/>
+            android:text="Weight:" />
 
         <TextView
+            android:id="@+id/info_weight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_below="@id/info_date_label"
-            android:textColor="@color/good"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="20dp"
             android:layout_marginEnd="50dp"
-            android:id="@+id/info_weight" />
+            android:layout_marginTop="20dp"
+            android:textColor="@color/good" />
 
         <TextView
-            android:text="@string/population"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/info_weight_label"
-            android:layout_marginTop="20dp"
             android:id="@+id/info_population_label"
-            android:layout_alignEnd="@+id/info_weight_label" />
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/info_weight_label"
             android:layout_below="@id/info_weight_label"
-            android:textColor="@color/bad"
-            android:layout_alignParentEnd="true"
             android:layout_marginTop="20dp"
+            android:text="@string/population" />
+
+        <TextView
+            android:id="@+id/info_population"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/info_weight_label"
             android:layout_marginEnd="50dp"
-            android:id="@+id/info_population" />
+            android:layout_marginTop="20dp"
+            android:textColor="@color/bad" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/hive_green"
             android:id="@+id/imageView"
-            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
             android:layout_marginEnd="10dp"
-            android:layout_marginTop="16dp" />
+            app:srcCompat="@drawable/hive_green"
+            android:contentDescription="@string/hive_icon" />
 
         <TextView
-            android:text="@string/location"
+            android:id="@+id/info_location_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/info_population_label"
             android:layout_alignEnd="@id/info_population_label"
+            android:layout_below="@id/info_population_label"
             android:layout_marginTop="20dp"
-            android:id="@+id/info_location_label" />
+            android:text="@string/location" />
 
         <TextView
+            android:id="@+id/info_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/info_population"
             android:layout_alignEnd="@id/info_population"
+            android:layout_below="@id/info_population"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:id="@+id/info_location"
             android:textColor="@color/good" />
 
         <ImageView
+            android:id="@+id/refreshLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_refresh_yellow"
-            android:layout_below="@id/info_population"
             android:layout_alignParentEnd="true"
-            android:onClick="setLocation"
-            android:layout_marginTop="17dp"
+            android:layout_below="@id/info_population"
             android:layout_marginEnd="15dp"
-            android:id="@+id/refreshLocation" />
+            android:layout_marginTop="17dp"
+            android:onClick="setLocation"
+            app:srcCompat="@drawable/ic_refresh_yellow" />
 
-        <ImageView
-            android:layout_marginTop="12dp"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            app:srcCompat="@drawable/map_icon"
-            android:layout_below="@id/info_location_label"
-            android:id="@+id/imageView2"
-            android:layout_marginStart="140dp" />
-
-        <TextView
-            android:layout_marginTop="10dp"
-            android:paddingTop="3dp"
-            android:text="@string/view_on_map"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView"
-            android:layout_below="@id/info_location_label"
-            android:paddingStart="25dp"
-            android:paddingEnd="25dp"
-            android:layout_marginStart="140dp"
-            android:paddingBottom="3dp"
-            android:onClick="goToMap" />
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal"
+            android:paddingTop="15dp"
+            android:onClick="goToMap"
+            android:layout_below="@id/refreshLocation">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                app:srcCompat="@drawable/map_icon" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:text="@string/view_on_map" />
+        </LinearLayout>
 
     </RelativeLayout>
 
