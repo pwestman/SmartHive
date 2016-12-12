@@ -56,11 +56,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="nottoobee.toobee.smarthive.HiveInfo" />
+        </activity>
+        <activity android:name=".AboutUs"
+            android:parentActivityName=".MainActivity">
 
-            <activity android:name=".AboutUs"
-                android:parentActivityName=".MainActivity">
-
-            </activity>
         </activity>
     </application>
 
