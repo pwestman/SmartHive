@@ -21,10 +21,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HiveInfo"
-            android:parentActivityName=".MainActivity" />
+        android:name=".HiveInfo"
+        android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".Settings"
+            android:name=".HowTo"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity" />
         <activity
@@ -35,6 +35,9 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="nottoobee.toobee.smarthive.MainActivity" />
+        </activity>
+        <activity android:name=".AboutUs"
+            android:parentActivityName=".MainActivity">
         </activity>
     </application>
 

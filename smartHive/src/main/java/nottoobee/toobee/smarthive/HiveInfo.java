@@ -16,12 +16,22 @@ import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,12 +43,29 @@ public class HiveInfo extends AppCompatActivity implements LocationListener {
     private LocationManager locationManager;
     private double lat;
     private double longi;
+    private ListView mDrawerList;
+    DrawerLayout drawerLayout;
+    ActionBarDrawerToggle actionBarDrawerToggle;
+    Toolbar toolbar;
+    private ArrayAdapter<String> mAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hive_info);
 
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        mDrawerList = (ListView)findViewById(R.id.navList);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_closed);
+
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+
+        addDrawerItems();
 
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
@@ -165,5 +192,46 @@ public void deleteHive(MenuItem item) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.hive_info_menu, menu);
         return true;
+    }
+
+    private void addDrawerItems() {
+        final String[] burgerArray = { "Hives Home", "How To", "About Us" };
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, burgerArray);
+        mDrawerList.setAdapter(mAdapter);
+
+        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch(position) {
+                    case 0:
+                        Intent i = new Intent(HiveInfo.this, MainActivity.class);
+                        startActivity(i);
+                        break;
+                    case 1:
+                        Intent j = new Intent(HiveInfo.this, HowTo.class);
+                        startActivity(j);
+                        break;
+                    default:
+                        Intent k = new Intent(HiveInfo.this, AboutUs.class);
+                        startActivity(k);
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        actionBarDrawerToggle.syncState();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);  // OPEN DRAWER
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
