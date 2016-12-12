@@ -49,6 +49,6 @@ public class HiveLocation extends FragmentActivity implements OnMapReadyCallback
         Double lon = Double.parseDouble(loc.split(",")[1]);
         LatLng hive = new LatLng(lat, lon);
         mMap.addMarker(new MarkerOptions().position(hive).title(i.getStringExtra("hiveName")));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(hive, 5));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(hive, 15));
     }
 }
