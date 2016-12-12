@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addDrawerItems() {
-        final String[] burgerArray = { "How To", "About Us" };
+        final String[] burgerArray = { getString(R.string.how_to), getString(R.string.about_us_drawer)};
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, burgerArray);
         mDrawerList.setAdapter(mAdapter);
 
@@ -226,19 +226,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Exit Application?");
+        alertDialogBuilder.setTitle(getResources().getString(R.string.exit));
 
         alertDialogBuilder
-                .setMessage("Click yes to exit")
+                .setMessage(getResources().getString(R.string.click_yes))
                 .setCancelable(false)
-                .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                .setPositiveButton(getResources().getString(R.string.yes),new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
                         // if this button is clicked, close
                         // current activity
                         MainActivity.this.finish();
                     }
                 })
-                .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                .setNegativeButton(getResources().getString(R.string.no),new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
                         // if this button is clicked, just close
                         // the dialog box and do nothing

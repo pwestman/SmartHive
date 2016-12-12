@@ -54,7 +54,7 @@ public class AboutUs extends AppCompatActivity {
     }
 
     private void addDrawerItems() {
-        final String[] burgerArray = { "Hives Home", "How To", "About Us" };
+        final String[] burgerArray = { getString(R.string.hives_home), getString(R.string.how_to), getString(R.string.about_us_drawer) };
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, burgerArray);
         mDrawerList.setAdapter(mAdapter);
 
