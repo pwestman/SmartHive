@@ -104,8 +104,10 @@ public void deleteHive(MenuItem item) {
                 Location location = locationManager.getLastKnownLocation(provider);
 
 
-                if (location != null)
+                if (location != null) {
                     onLocationChanged(location);
+                    Toast.makeText(getBaseContext(), "Location updated", Toast.LENGTH_SHORT).show();
+                }
                 else
                     Toast.makeText(getBaseContext(), "Location can't be retrieved", Toast.LENGTH_SHORT).show();
 

@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private int numHives = 0;
     private static DatabaseReference ref;
     private static ArrayList <String> hiveName;
+    private static ArrayList <String> hiveLocations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,10 +102,12 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot snapshot) {
                 grid.removeAllViews();
                 hiveName.clear();
+                hiveLocations.clear();
                 for (DataSnapshot msgSnapshot: snapshot.getChildren()) {
                     Hive hive = msgSnapshot.getValue(Hive.class);
                     drawHive(hive, grid);
                     hiveName.add(msgSnapshot.getKey());
+                    hiveLocations.add(hive.getLocation());
                 }
             }
             @Override
@@ -195,6 +198,10 @@ public class MainActivity extends AppCompatActivity {
 
     public static ArrayList getHiveNameList(){
         return hiveName;
+    }
+
+    public static ArrayList getHiveLocationList(){
+        return hiveLocations;
     }
 
     @Override
