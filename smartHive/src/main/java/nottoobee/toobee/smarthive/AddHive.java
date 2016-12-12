@@ -18,7 +18,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -96,10 +95,10 @@ public class AddHive extends AppCompatActivity implements LocationListener{
                 if (location != null)
                     onLocationChanged(location);
                 else
-                    Toast.makeText(getBaseContext(), "Location can't be retrieved", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), getString(R.string.location_cant), Toast.LENGTH_SHORT).show();
 
             } else {
-                Toast.makeText(getBaseContext(), "No Provider Found", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), getString(R.string.no_provider), Toast.LENGTH_SHORT).show();
             }
 
 
@@ -156,9 +155,9 @@ public class AddHive extends AppCompatActivity implements LocationListener{
         switch (requestCode){
             case MY_PERMISSION_REQUEST_FINE_LOCATION:
                 if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    Toast.makeText(getApplicationContext(), "Permissions granted!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.permissions_granted, Toast.LENGTH_SHORT).show();
                 }else {
-                    Toast.makeText(getApplicationContext(), "Location permissions required to be granted!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.locations_permissions_granted, Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -178,13 +177,13 @@ public class AddHive extends AppCompatActivity implements LocationListener{
 
     @Override
     public void onProviderEnabled(String provider) {
-        Toast.makeText(this, "Enabled new provider " + provider,
+        Toast.makeText(this, getString(R.string.enabled_provider) + " " + provider,
                 Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onProviderDisabled(String provider) {
-        Toast.makeText(this, "Disabled provider " + provider,
+        Toast.makeText(this, getString(R.string.disabled_provider) + " " + provider,
                 Toast.LENGTH_SHORT).show();
     }
 

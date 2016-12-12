@@ -13,16 +13,23 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,12 +42,28 @@ public class HiveInfo extends AppCompatActivity implements LocationListener {
     private double lat;
     private double longi;
     private Location location = null;
+    private ListView mDrawerList;
+    DrawerLayout drawerLayout;
+    ActionBarDrawerToggle actionBarDrawerToggle;
+    Toolbar toolbar;
+    private ArrayAdapter<String> mAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hive_info);
 
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        mDrawerList = (ListView)findViewById(R.id.navList);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_closed);
+
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+
+        addDrawerItems();
 
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
@@ -67,19 +90,19 @@ public class HiveInfo extends AppCompatActivity implements LocationListener {
 
 public void deleteHive(MenuItem item) {
     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-    alertDialogBuilder.setTitle("Delete Hive?");
+    alertDialogBuilder.setTitle(getResources().getString(R.string.delete_hive_));
 
     alertDialogBuilder
-            .setMessage("Click yes to delete this hive")
+            .setMessage(getResources().getString(R.string.click_yes_delete))
             .setCancelable(false)
-            .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+            .setPositiveButton(getResources().getString(R.string.yes),new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog,int id) {
                     // TODO
                     MainActivity.deleteHive(hiveKey);
                     startActivity(new Intent(HiveInfo.this, MainActivity.class));
                 }
             })
-            .setNegativeButton("No",new DialogInterface.OnClickListener() {
+            .setNegativeButton(getResources().getString(R.string.no),new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog,int id) {
 
                     dialog.cancel();
@@ -107,13 +130,13 @@ public void deleteHive(MenuItem item) {
 
                 if (location != null) {
                     onLocationChanged(location);
-                    Toast.makeText(getBaseContext(), "Location updated", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), R.string.location_updated, Toast.LENGTH_SHORT).show();
                 }
                 else
-                    Toast.makeText(getBaseContext(), "Location can't be retrieved", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), R.string.location_cant, Toast.LENGTH_SHORT).show();
 
             } else {
-                Toast.makeText(getBaseContext(), "No Provider Found", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), R.string.no_provider, Toast.LENGTH_SHORT).show();
             }
 
 
@@ -124,7 +147,7 @@ public void deleteHive(MenuItem item) {
             //MainActivity.updateLocation(hiveKey, Double.toString(lat).substring(0, 6) + ", " + Double.toString(longi).substring(0, 6));
 
         }else{
-            Toast.makeText(getBaseContext(), "Location permissions required", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(), R.string.permission_required, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -151,13 +174,13 @@ public void deleteHive(MenuItem item) {
 
     @Override
     public void onProviderEnabled(String provider) {
-        Toast.makeText(this, "Enabled new provider " + provider,
+        Toast.makeText(this, getString(R.string.new_provider) + provider,
                 Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onProviderDisabled(String provider) {
-        Toast.makeText(this, "Disabled provider " + provider,
+        Toast.makeText(this, getString(R.string.disabled_provider) + provider,
                 Toast.LENGTH_SHORT).show();
     }
 
@@ -167,5 +190,56 @@ public void deleteHive(MenuItem item) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.hive_info_menu, menu);
         return true;
+    }
+
+
+    public void goToMap(View view) {
+        Intent j = getIntent();
+
+        Intent i = new Intent(HiveInfo.this, HiveLocation.class);
+        i.putExtra("location", j.getStringExtra("hiveLocation"));
+        i.putExtra("hiveName", j.getStringExtra("hiveName"));
+        startActivity(i);
+    }
+
+    private void addDrawerItems() {
+        final String[] burgerArray = { getString(R.string.hives_home), getString(R.string.how_to), getString(R.string.about_us_drawer) };
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, burgerArray);
+        mDrawerList.setAdapter(mAdapter);
+
+        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch(position) {
+                    case 0:
+                        Intent i = new Intent(HiveInfo.this, MainActivity.class);
+                        startActivity(i);
+                        break;
+                    case 1:
+                        Intent j = new Intent(HiveInfo.this, HowTo.class);
+                        startActivity(j);
+                        break;
+                    default:
+                        Intent k = new Intent(HiveInfo.this, AboutUs.class);
+                        startActivity(k);
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        actionBarDrawerToggle.syncState();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);  // OPEN DRAWER
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
