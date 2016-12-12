@@ -19,6 +19,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,9 +31,33 @@ public class HiveInfo extends AppCompatActivity implements LocationListener {
     private final int MY_PERMISSION_REQUEST_FINE_LOCATION = 1;
     private String hiveKey;
     private String provider;
-    private LocationManager locationManager;
+    //private LocationManager locationManager;
     private double lat;
     private double longi;
+    private TextView tv;
+
+    // flag for GPS status
+    boolean isGPSEnabled = false;
+
+    // flag for network status
+    boolean isNetworkEnabled = false;
+
+    // flag for GPS status
+    boolean canGetLocation = false;
+
+    Location location; // location
+    double latitude; // latitude
+    double longitude; // longitude
+
+    // The minimum distance to change Updates in meters
+    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
+
+    // The minimum time between updates in milliseconds
+    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
+
+    // Declaring a Location Manager
+    protected LocationManager locationManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,9 +83,10 @@ public class HiveInfo extends AppCompatActivity implements LocationListener {
         ((TextView)findViewById(R.id.info_date)).setText(i.getStringExtra("hiveDataDate"));
         ((TextView)findViewById(R.id.info_weight)).setText(i.getStringExtra("hiveDataWeight"));
         ((TextView)findViewById(R.id.info_humidity)).setText(i.getStringExtra("hiveHumidity") + " %");
-        ((TextView)findViewById(R.id.info_location)).setText(i.getStringExtra("hiveLocation"));
 
         hiveKey = i.getStringExtra("hiveKey");
+        tv = (TextView) findViewById(R.id.info_location);
+        tv.setText(i.getStringExtra("hiveLocation"));
     }
 
     public void deleteHive(MenuItem item) {
@@ -89,42 +115,6 @@ public class HiveInfo extends AppCompatActivity implements LocationListener {
         alertDialog.show();
     }
 
-    public void setLocation(View view){
-        checkPerm();
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            Criteria criteria = new Criteria();
-            provider = locationManager.getBestProvider(criteria, false);
-
-            if (provider != null && !provider.equals("")) {
-
-                // Get the location from the given provider
-                locationManager.requestLocationUpdates(provider, 20000, 1, this);
-
-                Location location = locationManager.getLastKnownLocation(provider);
-
-
-                if (location != null) {
-                    onLocationChanged(location);
-                    Toast.makeText(getBaseContext(), "Location updated", Toast.LENGTH_SHORT).show();
-                }
-                else
-                    Toast.makeText(getBaseContext(), "Location can't be retrieved", Toast.LENGTH_SHORT).show();
-
-            } else {
-                Toast.makeText(getBaseContext(), "No Provider Found", Toast.LENGTH_SHORT).show();
-            }
-
-
-            TextView tv = (TextView) findViewById(R.id.info_location);
-            tv.setText(Double.toString(lat).substring(0, 6) + ", " + Double.toString(longi).substring(0, 6));
-
-            MainActivity.updateLocation(hiveKey, Double.toString(lat).substring(0, 6) + ", " + Double.toString(longi).substring(0, 6));
-
-        }else{
-            Toast.makeText(getBaseContext(), "Location permissions required", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     public void checkPerm(){
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
@@ -171,8 +161,100 @@ public class HiveInfo extends AppCompatActivity implements LocationListener {
         Intent j = getIntent();
 
         Intent i = new Intent(HiveInfo.this, HiveLocation.class);
-        i.putExtra("location", j.getStringExtra("hiveLocation"));
+        i.putExtra("location", tv.getText().toString());
         i.putExtra("hiveName", j.getStringExtra("hiveName"));
         startActivity(i);
+    }
+
+    public void setLocation(View view) {
+        checkPerm();
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            try {
+                locationManager = (LocationManager) this
+                        .getSystemService(LOCATION_SERVICE);
+
+                // getting GPS status
+                isGPSEnabled = locationManager
+                        .isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+                // getting network status
+                isNetworkEnabled = locationManager
+                        .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+                if (!isGPSEnabled && !isNetworkEnabled) {
+                    // no network provider is enabled
+                } else {
+                    this.canGetLocation = true;
+                    // First get location from Network Provider
+                    if (isNetworkEnabled) {
+                        locationManager.requestLocationUpdates(
+                                LocationManager.NETWORK_PROVIDER,
+                                MIN_TIME_BW_UPDATES,
+                                MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                        Log.d("Network", "Network");
+                        if (locationManager != null) {
+                            location = locationManager
+                                    .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                            if (location != null) {
+                                latitude = location.getLatitude();
+                                longitude = location.getLongitude();
+                            }
+                        }
+                    }
+                    // if GPS Enabled get lat/long using GPS Services
+                    if (isGPSEnabled) {
+                        if (location == null) {
+                            locationManager.requestLocationUpdates(
+                                    LocationManager.GPS_PROVIDER,
+                                    MIN_TIME_BW_UPDATES,
+                                    MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                            Log.d("GPS Enabled", "GPS Enabled");
+                            if (locationManager != null) {
+                                location = locationManager
+                                        .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                                if (location != null) {
+                                    latitude = location.getLatitude();
+                                    longitude = location.getLongitude();
+                                }
+                            }
+                        }
+                    }
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+            tv.setText(Double.toString(latitude).substring(0, 7) + ", " + Double.toString(longitude).substring(0, 7));
+
+            MainActivity.updateLocation(hiveKey, Double.toString(latitude).substring(0, 7) + ", " + Double.toString(longitude).substring(0, 7));
+        }else{
+            Toast.makeText(getBaseContext(), "Location permissions required", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * Function to get latitude
+     * */
+    public double getLatitude(){
+        if(location != null){
+            latitude = location.getLatitude();
+        }
+
+        // return latitude
+        return latitude;
+    }
+
+    /**
+     * Function to get longitude
+     * */
+    public double getLongitude(){
+        if(location != null){
+            longitude = location.getLongitude();
+        }
+
+        // return longitude
+        return longitude;
     }
 }
