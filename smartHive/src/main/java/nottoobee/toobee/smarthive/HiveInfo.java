@@ -45,9 +45,9 @@ public class HiveInfo extends AppCompatActivity implements LocationListener {
     // flag for GPS status
     boolean canGetLocation = false;
 
-    Location location; // location
-    double latitude; // latitude
-    double longitude; // longitude
+    Location location;
+    double latitude;
+    double longitude;
 
     // The minimum distance to change Updates in meters
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
@@ -66,17 +66,18 @@ public class HiveInfo extends AppCompatActivity implements LocationListener {
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
 
-        try {
+
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
             ab.setDisplayShowHomeEnabled(true);
             ab.setLogo(R.drawable.logo);
-        } catch (Exception e) {
-            e.printStackTrace();
+            ab.setDisplayUseLogoEnabled(true);
         }
 
+
         Intent i = getIntent();
-        ab.setDisplayUseLogoEnabled(true);
+
         ((TextView) findViewById(R.id.info_hive_name)).setText(i.getStringExtra("hiveName"));
         ((TextView) findViewById(R.id.info_population)).setText(i.getStringExtra("hiveDataPop"));
         ((TextView) findViewById(R.id.info_temp)).setText(i.getStringExtra("hiveDataTemp"));
