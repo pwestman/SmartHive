@@ -19,6 +19,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,6 +34,7 @@ public class HiveInfo extends AppCompatActivity implements LocationListener {
     private LocationManager locationManager;
     private double lat;
     private double longi;
+    private Location location = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,20 +91,19 @@ public void deleteHive(MenuItem item) {
     alertDialog.show();
 }
 
-    public void setLocation(View view){
+    public void setLocation(View view) throws InterruptedException {
         checkPerm();
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
             Criteria criteria = new Criteria();
-            provider = locationManager.getBestProvider(criteria, false);
+            provider = locationManager.getBestProvider(criteria, true);
 
             if (provider != null && !provider.equals("")) {
 
                 // Get the location from the given provider
                 locationManager.requestLocationUpdates(provider, 20000, 1, this);
 
-                Location location = locationManager.getLastKnownLocation(provider);
-
+                location = locationManager.getLastKnownLocation(provider);
 
                 if (location != null) {
                     onLocationChanged(location);
@@ -117,9 +118,10 @@ public void deleteHive(MenuItem item) {
 
 
             TextView tv = (TextView) findViewById(R.id.info_location);
+            //Log.i("provider", Double.toString(lat).substring(0, 6) + ", " + Double.toString(longi).substring(0, 6));
             tv.setText(Double.toString(lat).substring(0, 6) + ", " + Double.toString(longi).substring(0, 6));
 
-            MainActivity.updateLocation(hiveKey, Double.toString(lat).substring(0, 6) + ", " + Double.toString(longi).substring(0, 6));
+            //MainActivity.updateLocation(hiveKey, Double.toString(lat).substring(0, 6) + ", " + Double.toString(longi).substring(0, 6));
 
         }else{
             Toast.makeText(getBaseContext(), "Location permissions required", Toast.LENGTH_SHORT).show();
