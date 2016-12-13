@@ -48,4 +48,11 @@
     <string name="locations_permissions_granted">Autorisations de localisation à accorder!</string>
     <string name="permissions_granted">Autorisations accordées!</string>
     <string name="enabled_provider">Nouveau fournisseur activé</string>
+    <string name="hive_icon">Icône de ruche</string>
+    <string name="humidity">humidité</string>
+    <string name="location">emplacement</string>
+    <string name="map_icon">Icône de la carte</string>
+    <string name="refresh_location_icon">Actualiser l\'icône de localisation</string>
+    <string name="title_activity_hive_location">Emplacement de la ruche</string>
+    <string name="view_on_map">Voir sur la carte</string>
 </resources>

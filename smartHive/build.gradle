@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'smartHive'
+            keyPassword 'toobee||!toobee'
+            storeFile file('C:/Users/roberto/smartHive.jks')
+            storePassword 'toobee||!toobee'
+        }
+    }
     compileSdkVersion 24
     buildToolsVersion "24.0.2"
     defaultConfig {
@@ -15,6 +23,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            multiDexEnabled true
+            signingConfig signingConfigs.config
+            debuggable true
         }
     }
 }

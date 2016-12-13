@@ -31,6 +31,14 @@
           }
         },
         {
+          "client_id": "386695389370-9ol6rojrsuvir8pdovrcquir3fmegeaf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "nottoobee.toobee.smarthive",
+            "certificate_hash": "C6996EC162ECCB23B546D2B87C1433586D54F24D"
+          }
+        },
+        {
           "client_id": "386695389370-8r716tdbg3mj4b3l5e5lqh8bhhp3cdtl.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

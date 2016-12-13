@@ -29,15 +29,6 @@
             android:name=".HowTo"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity" />
-        <activity
-            android:name=".AddHive"
-            android:label="@string/title_activity_add_hive"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="nottoobee.toobee.smarthive.MainActivity" />
-        </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

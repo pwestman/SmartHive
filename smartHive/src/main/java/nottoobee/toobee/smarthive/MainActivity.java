@@ -145,13 +145,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.bee_menu, menu);
-        return true;
-    }
-
 
     /**
      * Creates a graphical representation of the given Hive in the given GridLayout.
@@ -196,10 +189,6 @@ public class MainActivity extends AppCompatActivity {
         ln.addView(tv);
         layout.addView(ln);
         ln.addView(iv);
-    }
-
-    public void newHive(MenuItem item) {
-        startActivity(new Intent(this, AddHive.class));
     }
 
     public static void deleteHive(String name) {
