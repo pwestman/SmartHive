@@ -28,6 +28,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -102,27 +103,38 @@ public class MainActivity extends AppCompatActivity {
             mUsername = mFirebaseUser.getDisplayName();
             if (mFirebaseUser.getPhotoUrl() != null) {
                 mPhotoUrl = mFirebaseUser.getPhotoUrl().toString();
-    }
-}
+            }
+        }
 
         hiveName = new ArrayList<>();
         hiveLocations = new ArrayList<>();
         // Database connection - Get DB reference that corresponds to active user.
         ref = FirebaseDatabase.getInstance()
                 .getReference("/users/" + mFirebaseUser.getUid());
-        ref.limitToLast(5).addValueEventListener(new ValueEventListener() {
+        ref.limitToLast(5).addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                grid.removeAllViews();
-                hiveName.clear();
-                hiveLocations.clear();
-                for (DataSnapshot msgSnapshot: snapshot.getChildren()) {
-                    Hive hive = msgSnapshot.getValue(Hive.class);
-                    drawHive(hive, grid);
-                    hiveName.add(msgSnapshot.getKey());
-                    hiveLocations.add(hive.getLocation());
-                }
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Hive hive = dataSnapshot.getValue(Hive.class);
+                drawHive(hive, grid, dataSnapshot.getKey());
+                hiveName.add(hive.getName());
+                hiveLocations.add(hive.getLocation());
             }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
             @Override
             public void onCancelled(DatabaseError firebaseError) {
                 Log.e("Hive", "The read failed: " + firebaseError.getMessage());
@@ -169,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
      * @param hive hive object
      * @param layout the GridLayout layout on the main screen, where the hive objects will be inflated
      */
-    private void drawHive(Hive hive, GridLayout layout) {
+    private void drawHive(Hive hive, GridLayout layout, final String key) {
         // TODO: Pretty this up to make it look like the mockup.
         final Hive newHive = hive;
         LinearLayout ln = new LinearLayout(this);
@@ -183,20 +195,7 @@ public class MainActivity extends AppCompatActivity {
         iv.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, HiveInfo.class);
-                i.putExtra("hiveName", newHive.getName());
-                i.putExtra("hiveLocation", newHive.getLocation());
-                i.putExtra("hiveHumidity", Integer.toString(newHive.getData().getHumidity()));
-                i.putExtra("hiveDataWeight", Integer.toString(newHive.getData().getWeight()));
-                i.putExtra("hiveDataTemp", Integer.toString(newHive.getData().getTemperature()));
-
-                Date date = new Date(newHive.getData().getDate()*1000L); // *1000 is to convert seconds to milliseconds
-                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd/MM/yy"); // the format of the date
-                sdf.setTimeZone(TimeZone.getTimeZone("GMT-5")); // timezone reference
-                String formattedDate = sdf.format(date);
-                i.putExtra("hiveDataDate", formattedDate);
-                i.putExtra("hiveDataPop", Integer.toString(newHive.getData().getPopulation()));
-                i.putExtra("hiveKey", newHive.getKey());
-                Log.i("time", new Date(newHive.getData().getDate()).toString());
+                i.putExtra("hiveKey", key);
                 startActivity(i);
             }
         });

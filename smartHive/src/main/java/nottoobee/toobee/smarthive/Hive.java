@@ -7,6 +7,7 @@ package nottoobee.toobee.smarthive;
 import android.os.Parcel;
 import android.os.Parcelable;
 import java.util.Date;
+import java.util.HashMap;
 
 /*
     N.B.: Instances this class can be passed directly to Firebase's setValue() method,
@@ -22,7 +23,7 @@ public class Hive implements Parcelable{
     private String name;
     private String location;
     private long date_created;
-    private Data data;
+    private HashMap<String, Data> data;
     private String key;
 
     public Hive() {
@@ -53,10 +54,11 @@ public class Hive implements Parcelable{
         return date_created;
     }
 
-    public Data getData() {
+    public HashMap<String, Data> getData() {
         return data;
     }
 
+    public void setData(HashMap<String, Data> data) { this.data = data; }
 
     public void setKey(String key) {
         this.key = (key);
@@ -76,7 +78,6 @@ public class Hive implements Parcelable{
         dest.writeString(name);
         dest.writeString(location);
         dest.writeLong(date_created);
-        dest.writeParcelable(data, 0);
     }
 
     public static final Parcelable.Creator<Hive> CREATOR = new Parcelable.Creator<Hive>() {

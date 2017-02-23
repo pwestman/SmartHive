@@ -33,8 +33,24 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Date;
+
 public class HiveInfo extends AppCompatActivity implements LocationListener {
 
+    private String mUsername;
+    private String mPhotoUrl;
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser mFirebaseUser;
+    private static DatabaseReference ref;
     private final int MY_PERMISSION_REQUEST_FINE_LOCATION = 1;
     private String hiveKey;
     private String provider;
@@ -97,46 +113,99 @@ public class HiveInfo extends AppCompatActivity implements LocationListener {
         }catch (Exception e){
             e.printStackTrace();
         }
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+
+        if (mFirebaseUser == null) {
+            startActivity(new Intent(this, SignIn.class));
+            finish();
+            return;
+        } else {
+            mUsername = mFirebaseUser.getDisplayName();
+            if (mFirebaseUser.getPhotoUrl() != null) {
+                mPhotoUrl = mFirebaseUser.getPhotoUrl().toString();
+            }
+        }
 
         Intent i = getIntent();
+        String key = i.getStringExtra("hiveKey");
+        Log.d("THE KEY IN HIVE INFO", key);
         ab.setDisplayUseLogoEnabled(true);
+        ref = FirebaseDatabase.getInstance()
+                .getReference("/users/" + mFirebaseUser.getUid() + "/" + key + "/data");
+        ref.limitToLast(1).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Data data = dataSnapshot.getValue(Data.class);
+                Log.d("SOME SHIT", String.valueOf(data.getDate()));
+                setInterfaceFields(data);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                Data data = dataSnapshot.getValue(Data.class);
+                setInterfaceFields(data);
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                Data data = dataSnapshot.getValue(Data.class);
+                setInterfaceFields(data);
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                Data data = dataSnapshot.getValue(Data.class);
+                setInterfaceFields(data);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError firebaseError) {
+                Log.e("Hive", "The read failed: " + firebaseError.getMessage());
+            }
+        });
+
         ((TextView)findViewById(R.id.info_hive_name)).setText(i.getStringExtra("hiveName"));
-        ((TextView)findViewById(R.id.info_population)).setText(i.getStringExtra("hiveDataPop"));
-        ((TextView)findViewById(R.id.info_temp)).setText(i.getStringExtra("hiveDataTemp"));
-        ((TextView)findViewById(R.id.info_date)).setText(i.getStringExtra("hiveDataDate"));
-        ((TextView)findViewById(R.id.info_weight)).setText(i.getStringExtra("hiveDataWeight"));
-        ((TextView)findViewById(R.id.info_humidity)).setText(i.getStringExtra("hiveHumidity") + " %");
+
 
         hiveKey = i.getStringExtra("hiveKey");
         tv = (TextView) findViewById(R.id.info_location);
         tv.setText(i.getStringExtra("hiveLocation"));
     }
 
-public void deleteHive(MenuItem item) {
-    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-    alertDialogBuilder.setTitle(getResources().getString(R.string.delete_hive_));
+    public void setInterfaceFields(Data data) {
+        ((TextView)findViewById(R.id.info_population)).setText(String.valueOf(data.getPopulation()));
+        ((TextView)findViewById(R.id.info_temp)).setText(String.valueOf(data.getTemperature()));
+        ((TextView)findViewById(R.id.info_date)).setText(new Date(data.getDate()).toString());
+        ((TextView)findViewById(R.id.info_weight)).setText(String.valueOf(data.getWeight()));
+        ((TextView)findViewById(R.id.info_humidity)).setText(11 + " %"); // TODO: FIX
+    }
 
-    alertDialogBuilder
-            .setMessage(getResources().getString(R.string.click_yes_delete))
-            .setCancelable(false)
-            .setPositiveButton(getResources().getString(R.string.yes),new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog,int id) {
-                    // TODO
-                    MainActivity.deleteHive(hiveKey);
-                    startActivity(new Intent(HiveInfo.this, MainActivity.class));
-                }
-            })
-            .setNegativeButton(getResources().getString(R.string.no),new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog,int id) {
+    public void deleteHive(MenuItem item) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle(getResources().getString(R.string.delete_hive_));
 
-                    dialog.cancel();
-                }
-            });
+        alertDialogBuilder
+                .setMessage(getResources().getString(R.string.click_yes_delete))
+                .setCancelable(false)
+                .setPositiveButton(getResources().getString(R.string.yes),new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        // TODO
+                        MainActivity.deleteHive(hiveKey);
+                        startActivity(new Intent(HiveInfo.this, MainActivity.class));
+                    }
+                })
+                .setNegativeButton(getResources().getString(R.string.no),new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
 
-    AlertDialog alertDialog = alertDialogBuilder.create();
+                        dialog.cancel();
+                    }
+                });
 
-    alertDialog.show();
-}
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        alertDialog.show();
+    }
 
     public void checkPerm(){
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
