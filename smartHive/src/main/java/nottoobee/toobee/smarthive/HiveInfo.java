@@ -178,7 +178,7 @@ public class HiveInfo extends AppCompatActivity implements LocationListener {
         ((TextView)findViewById(R.id.info_temp)).setText(String.valueOf(data.getTemperature()));
         ((TextView)findViewById(R.id.info_date)).setText(new Date(data.getDate()).toString());
         ((TextView)findViewById(R.id.info_weight)).setText(String.valueOf(data.getWeight()));
-        ((TextView)findViewById(R.id.info_humidity)).setText(11 + " %"); // TODO: FIX
+        ((TextView)findViewById(R.id.info_humidity)).setText(String.valueOf(data.getHumidity()));
     }
 
     public void deleteHive(MenuItem item) {
