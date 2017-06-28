@@ -176,10 +176,10 @@ public class HiveInfo extends AppCompatActivity implements LocationListener {
     public void setInterfaceFields(Data data) {
         SimpleDateFormat df = new SimpleDateFormat("MMM, d");
         ((TextView)findViewById(R.id.info_population)).setText(String.valueOf(data.getPopulation()));
-        ((TextView)findViewById(R.id.info_temp)).setText(String.valueOf(data.getTemperature()));
+        ((TextView)findViewById(R.id.info_temp)).setText(String.valueOf(data.getTemperature()) + "°C");
         ((TextView)findViewById(R.id.info_date)).setText(df.format(data.getDate()));
-        ((TextView)findViewById(R.id.info_weight)).setText(String.valueOf(data.getWeight()));
-        ((TextView)findViewById(R.id.info_humidity)).setText(String.valueOf(data.getHumidity()));
+        ((TextView)findViewById(R.id.info_weight)).setText(String.valueOf(data.getWeight()) + " lbs");
+        ((TextView)findViewById(R.id.info_humidity)).setText(String.valueOf(data.getHumidity()) + "%");
     }
 
     public void deleteHive(MenuItem item) {
