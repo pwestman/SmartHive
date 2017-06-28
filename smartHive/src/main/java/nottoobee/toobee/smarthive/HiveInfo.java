@@ -4,11 +4,10 @@
 
 package nottoobee.toobee.smarthive;
 
-import android.content.Context;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -40,8 +39,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class HiveInfo extends AppCompatActivity implements LocationListener {
@@ -174,9 +174,10 @@ public class HiveInfo extends AppCompatActivity implements LocationListener {
     }
 
     public void setInterfaceFields(Data data) {
+        SimpleDateFormat df = new SimpleDateFormat("MMM, d");
         ((TextView)findViewById(R.id.info_population)).setText(String.valueOf(data.getPopulation()));
         ((TextView)findViewById(R.id.info_temp)).setText(String.valueOf(data.getTemperature()));
-        ((TextView)findViewById(R.id.info_date)).setText(new Date(data.getDate()).toString());
+        ((TextView)findViewById(R.id.info_date)).setText(df.format(data.getDate()));
         ((TextView)findViewById(R.id.info_weight)).setText(String.valueOf(data.getWeight()));
         ((TextView)findViewById(R.id.info_humidity)).setText(String.valueOf(data.getHumidity()));
     }
