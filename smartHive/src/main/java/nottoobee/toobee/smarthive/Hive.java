@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 /*
-    N.B.: Instances this class can be passed directly to Firebase's setValue() method,
+    N.B.: Instances of this class can be passed directly to Firebase's setValue() method,
     since they use the same field names as the database.
 
     e.g.
